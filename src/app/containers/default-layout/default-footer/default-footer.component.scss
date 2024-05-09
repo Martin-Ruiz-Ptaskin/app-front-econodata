@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  animation: carousel-animation 10s linear infinite;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  margin-right: 20px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@keyframes carousel-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -3,9 +3,8 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { SimpleTableComponent } from './views/pages/simple-table/simple-table.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
 
@@ -33,10 +32,12 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
+
   UtilitiesModule
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -80,7 +81,8 @@ const APP_CONTAINERS = [
       useClass: HashLocationStrategy
     },
     IconSetService,
-    Title
+    Title,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

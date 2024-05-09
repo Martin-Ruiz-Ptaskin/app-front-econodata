@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PagesModule } from '../pages/pages.module';
 import {
   AvatarModule,
   ButtonGroupModule,
@@ -11,6 +11,7 @@ import {
   GridModule,
   NavModule,
   ProgressModule,
+
   TableModule,
   TabsModule
 } from '@coreui/angular';
@@ -40,7 +41,9 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartjsModule,
     AvatarModule,
     TableModule,
-    WidgetsModule
+    WidgetsModule,
+    PagesModule
+
   ],
   declarations: [DashboardComponent]
 })

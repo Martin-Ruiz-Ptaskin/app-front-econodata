@@ -1,447 +1,120 @@
-<app-widgets-dropdown></app-widgets-dropdown>
-<c-card class="mb-4">
-  <c-card-body>
-    <c-row>
-      <c-col sm="5">
-        <h4 class="card-title mb-0" id="traffic">Traffic</h4>
-        <div class="small text-medium-emphasis">January - December 2021</div>
-      </c-col>
-      <c-col class="d-none d-md-block" sm="7">
-        <button cButton class="float-end" color="primary">
-          <svg cIcon name="cilCloudDownload"></svg>
-        </button>
-        <form [formGroup]="trafficRadioGroup">
-          <c-button-group class="float-end me-3" role="group">
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Day"
-            />
-            <label
-              (click)="setTrafficPeriod('Day')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Day</label>
+<!---
+<div class="carousel"> <div class="carousel-container">
 
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Month"
-            />
-            <label
-              (click)="setTrafficPeriod('Month')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Month</label>
 
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Year"
-            />
-            <label
-              (click)="setTrafficPeriod('Year')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Year</label>
-          </c-button-group>
-        </form>
-      </c-col>
-    </c-row>
-    <c-chart
-      [data]="mainChart.data"
-      [height]="300"
-      [ngStyle]="{ 'marginTop.px': 40 }"
-      [options]="mainChart.options"
-      [type]="mainChart.type"
-    >
-      Main chart
-    </c-chart>
-  </c-card-body>
-  <c-card-footer>
-    <c-row class="text-center" [md]="5" [xs]="1">
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Visits</div>
-        <strong>29.703 Users (40%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="success" value="40"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Unique</div>
-        <strong>24.093 Users (20%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="info" value="20"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Page views</div>
-        <strong>78.706 Views (60%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="warning" value="60"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">New Users</div>
-        <strong>22.123 Users (80%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="danger" value="80"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Bounce Rate</div>
-        <strong>Average Rate (40.15%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar value="40"></c-progress-bar>
-        </c-progress>
-      </c-col>
-    </c-row>
-  </c-card-footer>
-</c-card>
+  <div  class="stock-item"   >
+    <div class="display-stock-selected"  style="position: absolute; width: 10%; height: 100%;  top: 0px;left: 0px;     "></div>
+    <div (click)="$event.stopPropagation()" class="center-button" >
+      <ng-container >
+        <img  src="assets\images\angular.jpg" alt="Imagen"  />
+      </ng-container>
+      <div style="display: flex; flex-direction: column; margin-left: 3px;">      <strong class="d-block text-gray-dark">nombre</strong>  <p>nombre 2</p>
+      </div>
+    </div>
 
-<app-widgets-brand [withCharts]="true"></app-widgets-brand>
+  </div>
+</div></div>
+-->
+<div class="firstSteps">
+  <div class="titleF">
+    <h2>Primeros Pasos</h2>
 
-<c-row>
-  <c-col xs>
-    <c-card class="mb-4">
-      <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
-      <c-card-body>
-        <c-row>
-          <c-col md="6" xl="6" xs="12">
-            <c-row>
-              <c-col sm="6">
-                <div
-                  class="border-start border-start-4 border-start-info py-1 px-3 mb-3"
-                >
-                  <div class="text-medium-emphasis small">New Clients</div>
-                  <div class="fs-5 fw-semibold">9,123</div>
-                </div>
-              </c-col>
-              <c-col sm="6">
-                <div
-                  class="border-start border-start-4 border-start-danger py-1 px-3 mb-3"
-                >
-                  <div class="text-medium-emphasis small">
-                    Recurring Clients
-                  </div>
-                  <div class="fs-5 fw-semibold">22,643</div>
-                </div>
-              </c-col>
-            </c-row>
+  </div>
 
-            <hr class="mt-0" />
+  <div class="card-conteiner row">
+  <div (click)="redirect()" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">¿Que necesitas saber para invertir?
+    </h3>
+    <p class="card__content">Que es una inversión y como mantenerla en el tiempo. </p>
+    <div class="card__date">
 
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Monday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="34"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="78"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Tuesday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="56"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="94"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Wednesday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="12"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="67"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Thursday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="43"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="91"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Friday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="22"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="73"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Saturday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="53"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="82"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Sunday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="9"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="69"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="legend text-center" ngPreserveWhitespaces>
-              <small>
-                <sup>
-                  <span class="badge badge-pill badge-sm bg-info">&nbsp;</span>
-                </sup>
-                <span>New clients</span>
-                &nbsp;&nbsp;
-                <sup>
-                  <span class="badge badge-pill badge-sm bg-danger">&nbsp;</span>
-                </sup>
-                <span>Recurring clients</span>
-              </small>
-            </div>
-          </c-col>
+    </div>
+    <div class="card__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+            <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+        </svg>
+    </div>
+  </div>
 
-          <c-col md="6" xl="6" xs="12">
-            <c-row>
-              <c-col sm="6">
-                <div class="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                  <div class="text-medium-emphasis small">Page views</div>
-                  <div class="fs-5 fw-semibold">78,623</div>
-                </div>
-              </c-col>
-              <c-col sm="6">
-                <div class="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                  <div class="text-medium-emphasis small">Organic</div>
-                  <div class="fs-5 fw-semibold">49,123</div>
-                </div>
-              </c-col>
-            </c-row>
+  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Title
+    </h3>
+    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <div class="card__date">
+        April 15, 2022
+    </div>
+    <div class="card__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+            <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+        </svg>
+    </div>
+  </div>
 
-            <hr class="mt-0" />
+  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Title
+    </h3>
+    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <div class="card__date">
+        April 15, 2022
+    </div>
+    <div class="card__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+            <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+        </svg>
+    </div>
+  </div>
 
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cilUser"></svg>
-                <span>Male</span>
-                <span class="ms-auto font-semibold">43%</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="warning" value="43"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-5">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cilUserFemale"></svg>
-                <span>Female</span>
-                <span class="ms-auto font-semibold">37%</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="warning" value="37"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
+  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Title
+    </h3>
+    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <div class="card__date">
+        April 15, 2022
+    </div>
+    <div class="card__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+            <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+        </svg>
+    </div>
+  </div>
+</div>
+</div>
 
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibGoogle"></svg>
-                <span>Organic Search</span>
-                <span class="ms-auto font-semibold">
-                  191,235 <span class="text-medium-emphasis small">(56%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="success" value="56"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibFacebook"></svg>
-                <span>Facebook</span>
-                <span class="ms-auto font-semibold">
-                  51,223 <span class="text-medium-emphasis small">(15%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="success" value="15"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibTwitter"></svg>
-                <span>Twitter</span>
-                <span class="ms-auto font-semibold">
-                  37,564 <span class="text-medium-emphasis small">(11%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="success" value="11"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibLinkedin"></svg>
-                <span>LinkedIn</span>
-                <span class="ms-auto font-semibold">
-                  27,319 <span class="text-medium-emphasis small">(8%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="success" value="8"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="divider d-flex justify-content-center">
-              <button
-                cButton
-                class="text-muted btn-link"
-                color="transparent"
-                size="sm"
-                type="button"
-              >
-                <svg cIcon name="cil-options"></svg>
-              </button>
-            </div>
-          </c-col>
-        </c-row>
-      </c-card-body>
-    </c-card>
-  </c-col>
-</c-row>
-<c-row>
-  <c-col xs>
-    <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
-      <c-card-body>
-        <table
-          [hover]="true"
-          [responsive]="true"
-          [striped]="true"
-          align="middle"
-          cTable
-          class="mb-0 border"
-        >
-          <thead cTableColor="light">
-            <tr>
-              <th class="text-center">
-                <svg cIcon name="cilPeople"></svg>
-              </th>
-              <th>User</th>
-              <th class="text-center">Country</th>
-              <th>Usage</th>
-              <th class="text-center">Payment Method</th>
-              <th>Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users; index as i">
-              <td class="text-center">
-                <c-avatar
-                  size="md"
-                  src="{{ user.avatar }}"
-                  status="{{ user.status }}"
-                ></c-avatar>
-              </td>
-              <td>
-                <div>{{ user.name }}</div>
-                <div class="small text-medium-emphasis text-nowrap">
-                  <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
-                  </span>
-                </div>
-              </td>
-              <td class="text-center">
-                <svg
-                  cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg>
-              </td>
-              <td>
-                <div class="d-flex justify-content-between">
-                  <div class="float-start">
-                    <strong>{{ user.usage }}%</strong>
-                  </div>
-                  <div class="float-end ms-1 text-nowrap">
-                    <small class="text-medium-emphasis">
-                      {{ user.period }}
-                    </small>
-                  </div>
-                </div>
-                <c-progress thin>
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar>
-                </c-progress>
-              </td>
-              <td class="text-center">
-                <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
-              </td>
-              <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </c-card-body>
-    </c-card>
-  </c-col>
-</c-row>
+
+<div class="row opitions" >
+<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+  <img src="https://cdn.euroinnova.edu.es/img/subidasEditor/img_20210309_075011-1615370759.webp" class="card-img-top" alt="politicos">
+  <div class="card-body">
+    <h5 class="card-title">Politicos</h5>
+    <p class="card-text">Encuentra las ultimas inversiones de los politicos.</p>
+    <a href="#" class="btn btn-primary">ver</a>
+  </div>
+</div>
+
+<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+    <img src="https://st4.depositphotos.com/13193658/25680/i/450/depositphotos_256806896-stock-photo-multicultural-businessmen-cheerful-businesswomen-standing.jpg" class="card-img-top" alt="politicos">
+    <div class="card-body">
+      <h5 class="card-title">Insiders</h5>
+      <p class="card-text">Encuentra las ultimas inversiones de los dueños y altos cargos dentro de las empresas.</p>
+      <a href="#" class="btn btn-primary">ver</a>
+    </div>
+ </div>
+
+<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+
+  <img style="height: 100%; width: 100%;" src="https://t3.ftcdn.net/jpg/02/15/96/52/360_F_215965232_562xAwqTJxl8xhh0Pljm5qgKBF4Y132w.jpg" class="card-img-top" alt="politicos">
+  <div class="card-body">
+    <h5 class="card-title">Fondos de inversión</h5>
+    <p class="card-text">Encuentra las ultimas inversiones de los fondos de inversión.</p>
+    <a href="#" class="btn btn-primary">ver</a>
+  </div>
+</div>
+</div>
+  <div class="col-md-4 col-lg-3 ">
+  <app-simple-table></app-simple-table>
+
+</div>
+<!-- Agrega más elementos según sea necesario -->
+
+
+
