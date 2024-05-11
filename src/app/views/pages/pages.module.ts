@@ -18,7 +18,6 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
     RegisterComponent,
     Page404Component,
     Page500Component,
-
     SimpleTableComponent
   ],
   imports: [

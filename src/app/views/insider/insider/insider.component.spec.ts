@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HorizonteComponent } from './horizonte.component';
+import { InsiderComponent } from './insider.component';
 
-describe('HorizonteComponent', () => {
-  let component: HorizonteComponent;
-  let fixture: ComponentFixture<HorizonteComponent>;
+describe('InsiderComponent', () => {
+  let component: InsiderComponent;
+  let fixture: ComponentFixture<InsiderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HorizonteComponent]
+      imports: [InsiderComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(HorizonteComponent);
+    fixture = TestBed.createComponent(InsiderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SimpleTableComponent } from './views/pages/simple-table/simple-table.component';
+import { PagesModule } from './views/pages/pages.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -73,7 +73,8 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    PagesModule
   ],
   providers: [
     {

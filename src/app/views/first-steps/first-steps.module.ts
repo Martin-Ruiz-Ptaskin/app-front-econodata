@@ -10,13 +10,11 @@ import {HorizonteComponent} from './horizonte/horizonte.component'
 
 import{FirstStepdRoutingModule} from './first-steps-routing.module'
 @NgModule({
-  declarations: [QueNecesitoComponent],
+  declarations: [QueNecesitoComponent,RiskComponent,ObjetivosComponent,InflacionComponent,HorizonteComponent],
   imports: [
     FirstStepdRoutingModule,
-    RiskComponent,
-    ObjetivosComponent,
-    InflacionComponent,
-    HorizonteComponent,
+    RouterModule,
+
     CommonModule,
 
   ]

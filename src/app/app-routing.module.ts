@@ -30,6 +30,27 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/first-steps/first-steps.module').then((m) => m.FirstStepsModule)
       },
+
+      {
+        path: 'founds',
+        loadChildren: () =>
+          import('./views/founds/founds.module').then((m) => m.FoundsModule)
+      }
+      ,
+
+      {
+        path: 'insider',
+        loadChildren: () =>
+          import('./views/insider/insider.module').then((m) => m.InsiderModule)
+      }
+      ,
+
+      {
+        path: 'politician',
+        loadChildren: () =>
+          import('./views/politician/politician.module').then((m) => m.PoliticianModule)
+      }
+      ,
       {
         path: 'theme',
         loadChildren: () =>

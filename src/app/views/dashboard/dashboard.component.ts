@@ -47,8 +47,8 @@ export class DashboardComponent implements OnInit {
     this.initCharts();
   }
 
-  redirect(){
-    this.router.navigate(['/PrimerosPasos']); // Redirigir después del login
+  redirect(ruta:any){
+    this.router.navigate([ruta]); // Redirigir después del login
 
   }
 }

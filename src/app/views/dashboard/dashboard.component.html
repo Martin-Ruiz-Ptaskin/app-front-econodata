@@ -22,12 +22,13 @@
   </div>
 
   <div class="card-conteiner row">
-  <div (click)="redirect()" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+  <div (click)="redirect('/PrimerosPasos/QueNecesito')" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
     <h3 class="card__title">¿Que necesitas saber para invertir?
     </h3>
-    <p class="card__content">Que es una inversión y como mantenerla en el tiempo. </p>
-    <div class="card__date">
-
+    <p class="card__content">
+      Invertir puede ser un proceso emocionante pero también arriesgado, por lo que es esencial conocer ciertas temáticas clave para tomar decisiones informadas.  </p>
+    <div class="card__date" style="margin-top: -12px;">
+     Lectura de 5 minutos
     </div>
     <div class="card__arrow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
@@ -36,12 +37,13 @@
     </div>
   </div>
 
-  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
-    <h3 class="card__title">Title
+  <div (click)="redirect('/PrimerosPasos/riesgo-retorno')" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Riesgo y Retorno
     </h3>
-    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-    <div class="card__date">
-        April 15, 2022
+    <p class="card__content">Entender el concepto de riesgo y cómo se relaciona con el retorno potencial.
+      Saber que inversiones con mayor potencial de retorno generalmente conllevan mayor riesgo. </p>
+    <div style="margin-top: 35px;" class="card__date">
+     Lectura de 5 minutos
     </div>
     <div class="card__arrow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
@@ -50,12 +52,13 @@
     </div>
   </div>
 
-  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
-    <h3 class="card__title">Title
+  <div (click)="redirect('/PrimerosPasos/horizonte')" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Horizonte de Inversión
     </h3>
-    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <p class="card__content">Determinar tu horizonte de inversión, es decir, cuánto tiempo planeas mantener tus inversiones.
+      Saber que un horizonte más largo generalmente permite asumir más riesgo. </p>
     <div class="card__date">
-        April 15, 2022
+     Lectura de 5 minutos
     </div>
     <div class="card__arrow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
@@ -64,12 +67,26 @@
     </div>
   </div>
 
-  <div class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
-    <h3 class="card__title">Title
+  <div (click)="redirect('/PrimerosPasos/objetivos')" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Objetivos Financieros
     </h3>
-    <p class="card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <p class="card__content">Definir tus objetivos financieros: ¿es para la jubilación, educación, compra de una casa, etc.? Asegurarte de que tus inversiones estén alineadas con tus objetivos. </p>
     <div class="card__date">
-        April 15, 2022
+     Lectura de 5 minutos
+    </div>
+    <div class="card__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+            <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+        </svg>
+    </div>
+  </div>
+  <div (click)="redirect('/PrimerosPasos/inflacion-tasas')" class="card col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    <h3 class="card__title">Inflación y Tasas de Interés
+    </h3>
+    <p class="card__content">Comprender el impacto de la inflación y las tasas de interés en tus inversiones. Saber que la inflación puede erosionar el valor de tus inversiones a lo largo del tiempo.
+    </p>
+    <div class="card__date">
+     Lectura de 5 minutos
     </div>
     <div class="card__arrow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
@@ -80,33 +97,36 @@
 </div>
 </div>
 
+<div class="titleF" style="margin-top:70px;">
+  <h2>Inspírate en las estrategias de los inversionistas </h2>
 
+</div>
 <div class="row opitions" >
-<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+<div (click)="redirect('politician/politician-list')" class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
   <img src="https://cdn.euroinnova.edu.es/img/subidasEditor/img_20210309_075011-1615370759.webp" class="card-img-top" alt="politicos">
   <div class="card-body">
     <h5 class="card-title">Politicos</h5>
     <p class="card-text">Encuentra las ultimas inversiones de los politicos.</p>
-    <a href="#" class="btn btn-primary">ver</a>
+    <a href="#" class="btn " style="    background: var(--primary-color);">ver</a>
   </div>
 </div>
 
-<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+<div (click)="redirect('insider/insider-list')" class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
     <img src="https://st4.depositphotos.com/13193658/25680/i/450/depositphotos_256806896-stock-photo-multicultural-businessmen-cheerful-businesswomen-standing.jpg" class="card-img-top" alt="politicos">
     <div class="card-body">
       <h5 class="card-title">Insiders</h5>
       <p class="card-text">Encuentra las ultimas inversiones de los dueños y altos cargos dentro de las empresas.</p>
-      <a href="#" class="btn btn-primary">ver</a>
+      <a href="#" class="btn ">ver</a>
     </div>
  </div>
 
-<div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
+<div (click)="redirect('founds/founds-list')" class="card col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 25rem;">
 
   <img style="height: 100%; width: 100%;" src="https://t3.ftcdn.net/jpg/02/15/96/52/360_F_215965232_562xAwqTJxl8xhh0Pljm5qgKBF4Y132w.jpg" class="card-img-top" alt="politicos">
   <div class="card-body">
     <h5 class="card-title">Fondos de inversión</h5>
     <p class="card-text">Encuentra las ultimas inversiones de los fondos de inversión.</p>
-    <a href="#" class="btn btn-primary">ver</a>
+    <a href="#" class="btn ">ver</a>
   </div>
 </div>
 </div>

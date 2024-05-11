@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InflacionComponent } from './inflacion.component';
+import { InsiderListComponent } from './insider-list.component';
 
-describe('InflacionComponent', () => {
-  let component: InflacionComponent;
-  let fixture: ComponentFixture<InflacionComponent>;
+describe('InsiderListComponent', () => {
+  let component: InsiderListComponent;
+  let fixture: ComponentFixture<InsiderListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InflacionComponent]
+      imports: [InsiderListComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(InflacionComponent);
+    fixture = TestBed.createComponent(InsiderListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

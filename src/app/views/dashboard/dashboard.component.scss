@@ -15,6 +15,7 @@
 .card{
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 15px;
 }
 .card-conteiner{
   display: flex;
@@ -53,6 +54,7 @@
   padding: 0;
   font-size: 1.3rem;
   font-weight: bold;
+  width: 100%;
 }
 
 .card .card__date {
@@ -83,6 +85,11 @@
   color: var(--primary-color);
   text-decoration: underline;
 }
+.card:hover  {
+  -webkit-box-shadow: -4px 9px 5px 0px rgba(224,221,224,1);
+  -moz-box-shadow: -4px 9px 5px 0px rgba(224,221,224,1);
+  box-shadow: -4px 9px 5px 0px rgba(224,221,224,1);
+}
 
 .card:hover .card__arrow {
   background: #111;
@@ -90,6 +97,12 @@
 
 .card:hover .card__arrow svg {
   transform: translateX(3px);
+}
+.card:hover img {
+  filter: brightness(.8);
+  filter: grayscale(5%) sepia(4%) blur(1px);
+  -webkit-filter: grayscale(5%) sepia(4%) blur(1px);
+  -moz-filter: grayscale(5%) sepia(4%) blur(1px);
 }
 .opitions{
   justify-content: space-between;
@@ -116,6 +129,10 @@ width: 100%;
   margin-right: 20px;
   text-align: center;
 
+}
+.btn{
+  background: var(--primary-color);
+  color: white;
 }
 
 img {
