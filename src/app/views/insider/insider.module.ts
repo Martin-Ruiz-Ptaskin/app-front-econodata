@@ -7,6 +7,7 @@ import { TableModule } from '@coreui/angular';
 import { InsiderRoutingModule } from './insider-routing.module';
 import { PagesModule } from '../pages/pages.module';
 import { SimpleTableComponent } from '../pages/simple-table/simple-table.component';
+import {PruebaComponent} from '../common/prueba/prueba.component'
 @NgModule({
   declarations: [],
   imports: [
@@ -15,6 +16,7 @@ import { SimpleTableComponent } from '../pages/simple-table/simple-table.compone
     InsiderComponent,
     InsiderListComponent,
     InsiderRoutingModule,
+    PruebaComponent
 
 
 

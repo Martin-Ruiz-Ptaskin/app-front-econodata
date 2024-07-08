@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './views/pages/pages.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { HttpClientModule } from '@angular/common/http';
+
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
 
@@ -13,7 +15,7 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
-
+import { PruebaComponent } from './views/common/prueba/prueba.component';
 import {
   AvatarModule,
   BadgeModule,
@@ -23,6 +25,7 @@ import {
   CardModule,
   DropdownModule,
   FooterModule,
+
   FormModule,
   GridModule,
   HeaderModule,
@@ -54,6 +57,7 @@ const APP_CONTAINERS = [
     AvatarModule,
     BreadcrumbModule,
     FooterModule,
+    HttpClientModule,
     DropdownModule,
     GridModule,
     HeaderModule,
@@ -74,7 +78,8 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     NgScrollbarModule,
-    PagesModule
+    PagesModule,
+    PruebaComponent
   ],
   providers: [
     {

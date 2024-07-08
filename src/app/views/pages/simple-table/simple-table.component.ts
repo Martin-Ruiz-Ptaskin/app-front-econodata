@@ -1,5 +1,6 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,OnChanges,SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table'; // Si estás usando Angular Material
 
 export interface PeriodicElement {
   name: string;
@@ -28,15 +29,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-export class SimpleTableComponent {
+export class SimpleTableComponent implements OnChanges {
   @Input() displayedColumns2: string | undefined;
   @Input() dataSource2: string | undefined;
+  @Input() inputdataSource: any;
   @Input() titulo: string | undefined;
   @Input() paginadodor: string | undefined;
   pagina:number=0;
-  
+  dataSource: MatTableDataSource<any> = new MatTableDataSource(); // Inicializa dataSource
+  @Input() displayedColumns:any;
 
+  constructor() {}
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  ngOnChanges(changes: SimpleChanges): void {
+    // Maneja las actualizaciones de las propiedades @Input
+    if (changes['inputdataSource']) {
+      console.log(this.displayedColumns)
+      console.log(this.inputdataSource)
+      this.dataSource = this.inputdataSource ;
+    }
+
+  }
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
-import { SimpleTableComponent } from '../pages/simple-table/simple-table.component';
 interface IUser {
   name: string;
   state: string;
