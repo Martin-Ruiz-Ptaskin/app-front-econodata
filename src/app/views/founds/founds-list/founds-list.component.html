@@ -5,4 +5,4 @@
   </div>
   <br>
   <p>Observar el insider trading de los fondos de inversión es crucial para saber en qué invertir, ya que estos fondos manejan grandes volúmenes de capital y suelen tener acceso a análisis detallados y pronósticos de mercado privilegiados..</p>
-  <app-simple-table [inputdataSource]="FoundsList" [displayedColumns]="displayedColumns"></app-simple-table>
+  <app-simple-table (dataEmitter)="nextPage($event)" [nextPageBtn]="next_Page" [inputdataSource]="FoundsList" [displayedColumns]="displayedColumns"></app-simple-table>

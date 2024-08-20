@@ -1,4 +1,4 @@
-import { Component,Input,OnChanges,SimpleChanges } from '@angular/core';
+import { Component,Input,OnChanges,SimpleChanges,Output,EventEmitter  } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table'; // Si estás usando Angular Material
 
@@ -33,8 +33,9 @@ export class SimpleTableComponent implements OnChanges {
   @Input() displayedColumns2: string | undefined;
   @Input() dataSource2: string | undefined;
   @Input() inputdataSource: any;
+  @Input() nextPageBtn: boolean | undefined;
   @Input() titulo: string | undefined;
-  @Input() paginadodor: string | undefined;
+  @Output() dataEmitter: EventEmitter<number> = new EventEmitter<number>();
   pagina:number=0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource(); // Inicializa dataSource
   @Input() displayedColumns:any;
@@ -49,5 +50,12 @@ export class SimpleTableComponent implements OnChanges {
       this.dataSource = this.inputdataSource ;
     }
 
+
   }
+
+  sendData() {
+    this.pagina++
+    this.dataEmitter.emit(this.pagina);
+  }
+
 }

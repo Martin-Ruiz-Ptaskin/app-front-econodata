@@ -10,6 +10,7 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { IconModule } from '@coreui/icons-angular';
 import { MatTableModule } from '@angular/material/table';
 
+
 import { SimpleTableComponent } from './simple-table/simple-table.component';
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 @NgModule({
@@ -29,7 +30,8 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,
+   
   ],
   exports:[
 

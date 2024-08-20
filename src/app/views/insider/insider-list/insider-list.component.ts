@@ -14,19 +14,21 @@ import {InsiderListServiceService} from '../service/insider-list-service.service
 })
 
 export class InsiderListComponent implements OnInit {
-  insiderList: any;
-
+  insiderList: Array<any>=[];
+  next_Page:boolean=false
   constructor(private InsiderListServiceService: InsiderListServiceService) {}
   displayedColumns: string[] = ['Nombre', 'Ticker', 'Empresa', 'Fecha', 'Monto', 'Trade'];
   ngOnInit(): void {
     this.InsiderListServiceService.getData().subscribe(
       response => {
+        this.next_Page=response.next
+
         console.log(response)
         this.insiderList = response.data.map((item:any) => {
           return {
-            Nombre:  {nombre:item.clave,    tipo:"link",  accion:"/"},
+            Nombre:  {nombre:item.name,    tipo:"link",  accion:"/"},
             Ticker:  {nombre:item.company , tipo:"texto", accion:"/"},
-            Empresa: {nombre:item.name ,    tipo:"texto", accion:"/"},
+            Empresa: {nombre:item.clave ,    tipo:"texto", accion:"/"},
             Fecha:   {nombre:item.date ,    tipo:"texto", accion:"/"},
             Monto:   {nombre:item.amount ,  tipo:"texto", accion:"/"},
             Trade:   {nombre: item.trade ,  tipo:"texto", accion:"/"}
@@ -39,5 +41,31 @@ export class InsiderListComponent implements OnInit {
         console.error('Error fetching data:', error);
       }
     );
+  }
+  nextPage(pagina:any){
+    console.log(pagina)
+    this.InsiderListServiceService.getNextPage(pagina).subscribe(
+      response => {
+        console.log(response)
+        this.next_Page=response.next
+        this.insiderList = this.insiderList.concat(response.data.map((item:any) => {
+
+          return {
+            Nombre:  {nombre:item.name,    tipo:"link",  accion:"/"},
+            Ticker:  {nombre:item.company , tipo:"texto", accion:"/"},
+            Empresa: {nombre:item.clave ,    tipo:"texto", accion:"/"},
+            Fecha:   {nombre:item.date ,    tipo:"texto", accion:"/"},
+            Monto:   {nombre:item.amount ,  tipo:"texto", accion:"/"},
+            Trade:   {nombre: item.trade ,  tipo:"texto", accion:"/"}
+          };
+        }));
+
+        console.log(this.insiderList);
+      },
+      error => {
+        console.error('Error fetching data:', error);
+      }
+    );
+
   }
 }

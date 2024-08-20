@@ -9,7 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
-
+import {MatButton} from '@angular/material/button';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
 // Import app component
 import { AppComponent } from './app.component';
 
@@ -59,6 +61,9 @@ const APP_CONTAINERS = [
     FooterModule,
     HttpClientModule,
     DropdownModule,
+    MatButton,
+    MatButtonModule,
+    MatTooltip,
     GridModule,
     HeaderModule,
     SidebarModule,
