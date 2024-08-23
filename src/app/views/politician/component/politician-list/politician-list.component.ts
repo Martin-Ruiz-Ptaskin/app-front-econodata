@@ -17,18 +17,20 @@ FoundsList: any=[];
 
 
   constructor(private PoliticianListService: PoliticianListService) {}
-  displayedColumns: string[] = ['Nombre', 'Ticker', 'partido', 'Fecha', 'Monto', 'Trade'];
+  displayedColumns: string[] = ['Nombre', 'Ticker', 'partido', 'Fecha', 'Monto', 'Operacion'];
   ngOnInit(): void {
     this.PoliticianListService.getData().subscribe(
       response => {
         this.FoundsList = response.data.map((item:any) => {
+          console.log(item)
+
           return {
             Nombre:  {nombre:item.name,    tipo:"link",  accion:"/"},
             Ticker:  {nombre:item.asset , tipo:"texto", accion:"/"},
             partido: {nombre:item.party ,    tipo:"texto", accion:"/"},
             Fecha:   {nombre:item.pubDate ,    tipo:"texto", accion:"/"},
             Monto:   {nombre:item.value ,  tipo:"texto", accion:"/"},
-            Trade:   {nombre: item.value ,  tipo:"texto", accion:"/"}
+            Operacion:   {nombre: item.operacion ,  tipo:"texto", accion:"/"}
 
           };
         });;

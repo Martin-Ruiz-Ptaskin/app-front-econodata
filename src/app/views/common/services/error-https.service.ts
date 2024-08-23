@@ -11,7 +11,7 @@ export class ErrorHttpsService {
 
   error(){
     console.log("error")
-    this.openSnackBar('Erro al cargar la informacion', 'Undo')
+    this.openSnackBar('Error al cargar la informacion', 'OK')
   }
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);

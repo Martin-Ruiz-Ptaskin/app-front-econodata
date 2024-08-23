@@ -33,7 +33,7 @@ export class SimpleTableComponent implements OnChanges {
   @Input() displayedColumns2: string | undefined;
   @Input() dataSource2: string | undefined;
   @Input() inputdataSource: any;
-  @Input() nextPageBtn: boolean | undefined;
+  @Input() nextPageBtn: boolean | undefined =false;
   @Input() titulo: string | undefined;
   @Output() dataEmitter: EventEmitter<number> = new EventEmitter<number>();
   pagina:number=0;

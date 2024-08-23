@@ -5,4 +5,4 @@
   </div>
   <br>
   <p>Es importante tener en cuenta el insider trading de los políticos para saber en qué invertir, ya que sus movimientos financieros pueden proporcionar pistas sobre futuros cambios en políticas y regulaciones que impactarán el mercado. Los políticos, debido a su acceso a información privilegiada y no pública sobre decisiones gubernamentales inminentes, pueden anticipar tendencias económicas y movimientos del mercado antes que el público general. .</p>
-  <app-simple-table></app-simple-table>
+  <app-simple-table  (dataEmitter)="nextPage($event)" [nextPageBtn]="next_Page" [inputdataSource]="FoundsList"   [displayedColumns]="displayedColumns"></app-simple-table>
