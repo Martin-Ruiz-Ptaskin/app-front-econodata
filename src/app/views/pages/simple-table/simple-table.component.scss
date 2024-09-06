@@ -1,3 +1,9 @@
 table{
   width: 100%;
 }
+@media (max-width: 600px) {
+  table.mat-elevation-z8 th, table.mat-elevation-z8 td {
+    padding: 4px 8px; /* Reduce padding */
+    font-size: 12px; /* Smaller font size */
+  }
+}
