@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {TickerService} from '../ticker/service/ticker.service'
-import { SimpleTableComponent } from '../../pages/simple-table/simple-table.component';
 import { PagesModule } from '../../pages/pages.module';
 import { IconDirective } from '@coreui/icons-angular';
 import { cilCash, cilUser , cilClipboard} from '@coreui/icons';

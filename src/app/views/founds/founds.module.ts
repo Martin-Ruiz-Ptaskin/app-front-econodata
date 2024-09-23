@@ -9,17 +9,28 @@ import { IconDirective } from '@coreui/icons-angular';
 import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
 import { ColComponent, RowComponent, TemplateIdDirective, WidgetStatFComponent } from '@coreui/angular';
 import { ChartsModule } from '../charts/charts.module';
+
 import { ChartsComponent } from '../charts/charts.component';
+import { CardModule, GridModule } from '@coreui/angular';
+import { ChartjsModule } from '@coreui/angular-chartjs';
 @NgModule({
   declarations: [FoundsComponent],
   imports: [
     CommonModule,
+    ChartsModule,
 
     RouterModule,
     FoundsRoutingModule,
     FoundsListComponent,
     ChartsModule,
-    PagesModule,RowComponent,ColComponent, WidgetStatFComponent, TemplateIdDirective,IconDirective,CommonModule
+    PagesModule,RowComponent,ColComponent, WidgetStatFComponent, TemplateIdDirective,IconDirective,CommonModule,
+     // Importa los módulos de CoreUI necesarios
+     CardModule,
+     GridModule,
+     ChartjsModule,
+     RowComponent,
+     ColComponent,
+     WidgetStatFComponent
 
   ]
 })

@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ActivatedRoute } from '@angular/router';
-import { SimpleTableComponent } from '../../pages/simple-table/simple-table.component';
-import { PagesModule } from '../../pages/pages.module';
-import { IconDirective } from '@coreui/icons-angular';
-import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
-import { ColComponent, RowComponent, TemplateIdDirective, WidgetStatFComponent } from '@coreui/angular';
+
 import {FoundListServiceService} from '../service/found-list-service.service'
-import { ChartsModule } from '../../charts/charts.module';
+import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
+
 
 @Component({
   selector: 'app-founds',
@@ -20,9 +17,13 @@ export class FoundsComponent implements OnInit {
   foundName:string="";
   foundAssets:any;
   tenencias:any
+  icons = { cilCash, cilUser,cilClipboard };
+  cantidadPosiciones:number =0;
   valortotal:any
   assets:any
-  chartPieData:any
+  chartDoughnutData:any
+  displayedColumns: string[] = ['Ticker', 'Cantidad_acciones', 'Porcentaje', 'Dinero', 'Movimiento'];
+
   constructor(private route: ActivatedRoute,private FoundListServiceService: FoundListServiceService  ) { }
 
   ngOnInit(): void {
@@ -35,22 +36,40 @@ export class FoundsComponent implements OnInit {
             this.foundName=item.name
 
             this.tenencias=this.calcularResumenFromString(item.assets)
-            console.log(this.tenencias)
-            console.log(this.assets)
-          this.chartPieData=  this.crearGrafico(this.assets)
 
-            /*
-            return {
-              Fondo: {nombre:item.name,tipo:"link",accion:"/"},
-              Ultima_modificación:  {nombre:item.date,tipo:"texto"},
+            this.chartDoughnutData=  this.crearGrafico(this.assets)
+            this.cantidadPosiciones=this.assets.length
+            this.assets=  this.assets.map((item:any) => {
+              let movimiento = "";
 
-            };*/
-          });;
+              if (item.movimiento) {
+                if (item.movimiento.toLowerCase().includes("add")) {
+                  movimiento = `Compra ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
+                } else if (item.movimiento.toLowerCase().includes("reduce")) {
+                  movimiento = `Venta ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
+                }
+              } else {
+                movimiento = "Nueva compra";
+              }
+
+              return {
+                Ticker:  {nombre:item.name,tipo:"texto"},
+                Cantidad_acciones:  {nombre:item.cantidad,tipo:"texto"},
+                Porcentaje:  {nombre:item.portfolioPart +"%",tipo:"texto"},
+                Dinero:  {nombre:item.value,tipo:"texto"},
+                Movimiento:  {nombre:movimiento,tipo:"texto"},
+
+
+              };
+            });
+          });
         },
         error => {
           console.error('Error fetching data:', error);
         }
       );
+
+
     }
 }
 
@@ -78,12 +97,12 @@ export class FoundsComponent implements OnInit {
 }
 
 crearGrafico(data:any){
-  console.log(data)
+  const colores=this.generarColoresPastel((data.length/2))
   const chartDoughnutData = {
     labels: [] as string[],
     datasets: [
       {
-        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'], // Colores personalizados
+        backgroundColor:colores, // Colores personalizados
         data: [] as number[],
       }
     ]
@@ -112,10 +131,10 @@ crearGrafico(data:any){
   activosConPorcentaje.sort((a: any, b: any) => b.percentage - a.percentage);
 
   // Tomar las primeras 9 acciones con mayor porcentaje
-  const top9 = activosConPorcentaje.slice(0, 9);
+  const top9 = activosConPorcentaje.slice(0, 15);
 
   // Calcular el porcentaje acumulado del resto
-  const otrosPorcentaje = activosConPorcentaje.slice(9).reduce((acc: number, item: any) => acc + item.percentage, 0);
+  const otrosPorcentaje = activosConPorcentaje.slice(15).reduce((acc: number, item: any) => acc + item.percentage, 0);
 
   // Agregar las 9 acciones a labels y data
   top9.forEach((item: any) => {
@@ -128,6 +147,22 @@ crearGrafico(data:any){
   chartDoughnutData.datasets[0].data.push(parseFloat(otrosPorcentaje.toFixed(2))); // Redondear a 2 decimales
   console.log(chartDoughnutData)
   return chartDoughnutData;
+}
+ generarColoresPastel(cantidad: number): string[] {
+  const colores: string[] = [];
+
+  for (let i = 0; i < cantidad; i++) {
+    // Genera valores RGB aleatorios para un color pastel
+    const red = Math.floor((Math.random() * 127) + 127);   // Valores entre 127 y 255
+    const green = Math.floor((Math.random() * 127) + 127); // Valores entre 127 y 255
+    const blue = Math.floor((Math.random() * 127) + 127);  // Valores entre 127 y 255
+
+    // Convierte los valores RGB a formato hexadecimal y los agrega a la lista
+    const color = `#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${blue.toString(16).padStart(2, '0')}`;
+    colores.push(color);
+  }
+
+  return colores;
 }
 
 

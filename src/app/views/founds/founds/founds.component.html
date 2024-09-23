@@ -1,5 +1,57 @@
 <div class="title skeleton" [ngClass]="{'skeleton': foundName === ''}"><h2>  {{foundName}}</h2>
 
 </div>
-<h4> {{foundName}} en los ultimos 6 meses</h4>
 
+
+<c-row>
+
+  <c-col lg="4" xs="12">
+    <c-widget-stat-f
+      [title]="'Posiciones consolidadas'"
+      class="mb-3"
+      color="primary"
+      value="{{cantidadPosiciones}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilUser" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+  <c-col lg="4" xs="12">
+    <c-widget-stat-f
+      [title]="'Dinero invertido en este activo'"
+      class="mb-3"
+      color="success"
+      value="{{valortotal.toLocaleString('en-US')}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilCash" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+  <c-col lg="4" xs="12">
+    <c-widget-stat-f
+      [title]="'Acciones compradas'"
+      class="mb-3"
+      color="info"
+      value="{{valortotal.toLocaleString('en-US')}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilClipboard" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+</c-row>
+<app-simple-table   [inputdataSource]="assets"   [displayedColumns]="displayedColumns"></app-simple-table>
+
+
+<c-col xs="12" lg="6">
+  <c-card class="mb-4">
+    <c-card-header>
+      Doughnut Chart
+    </c-card-header>
+    <c-card-body>
+      <c-chart type="doughnut" [data]="chartDoughnutData"></c-chart>
+    </c-card-body>
+  </c-card>
+</c-col>

@@ -18,7 +18,9 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
     GridModule,
     BadgeModule,
     DocsComponentsModule
-  ]
+  ],
+  exports: [ChartsComponent] // Asegúrate de exportarlo aquí
+
 
 })
 export class ChartsModule {
