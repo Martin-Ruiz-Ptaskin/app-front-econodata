@@ -76,7 +76,7 @@
               "buildTarget": "Econodata:build:production"
             },
             "development": {
-              "buildTarget": "Econodata:development"
+              "buildTarget": "Econodata:build:development"
             }
           },
           "defaultConfiguration": "development"

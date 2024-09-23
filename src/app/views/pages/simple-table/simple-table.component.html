@@ -1,5 +1,26 @@
+<div *ngIf="inputdataSource==''" style="overflow-x: auto;">
 
-<div style="overflow-x: auto;">
+  <table  mat-table [dataSource]="skeleton" class="mat-elevation-z8">
+
+<!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+      <ng-container *ngFor="let item of displayedColumns" matColumnDef={{item}}>
+        <th mat-header-cell *matHeaderCellDef> {{item}} </th>
+
+          <td class="skeleton"  mat-cell *matCellDef="let element " > <a *ngIf="element[item].tipo =='link'" (click)="redirect(element[item].accion)" >{{element[item].nombre}} </a> <p *ngIf="element[item].tipo !='link'">{{element[item].nombre}} </p></td>
+
+
+
+      </ng-container>
+
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+</table>
+</div>
+<div *ngIf="inputdataSource!=''" style="overflow-x: auto;">
     <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -21,7 +42,7 @@
 </table>
 </div>
 <div style="display: flex; width: 100%; justify-content: center;">
-  <button *ngIf="nextPageBtn" (click)="sendData()" type="button" class="btn btn-dark">siguiente</button>
+  <button *ngIf="nextPageBtn  &&inputdataSource!=''" (click)="sendData()" type="button" class="btn btn-dark">siguiente</button>
 </div>
 
 

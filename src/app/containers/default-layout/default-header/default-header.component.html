@@ -49,3 +49,8 @@
 </ng-container>
 
 </c-header>
+<div (click)="goBack()" *ngIf="showBackButton" class="volver">
+
+  <svg style="margin-right: 5px;"  [cIcon]="icons.cilArrowLeft" size="xl" width="24"></svg>
+  <p>Volver</p>
+</div>

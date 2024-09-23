@@ -54,4 +54,27 @@ getNextPage(page:number){
 }
 
 
+getFoundById(name:string){
+  let url = this.apiUrl + "getFoundById.php"+"?page="+name;
+    return this.http.get<any>(url).pipe(
+      map(response => {
+        // Aquí validamos si el código de estado no es 200
+        if (response.status !== 200) {
+          // Si no es 200, llamamos al servicio de error y arrojamos un error
+          this.error.error();
+          throw new HttpErrorResponse({ status: response.status, statusText: response.statusText });
+        }
+        // Si es 200, devolvemos la respuesta
+        return response;
+      }),
+      catchError(error => {
+        // Aquí manejamos otros posibles errores que puedan ocurrir
+        this.error.error();
+        return throwError(() => error);
+      })
+    );
+
+}
+
+
 }

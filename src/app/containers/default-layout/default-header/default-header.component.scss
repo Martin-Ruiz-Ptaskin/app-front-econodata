@@ -11,7 +11,18 @@
   outline: none;
   opacity: 0.8;
 }
-
+p{
+  margin-bottom: 0rem;
+}
+.volver{
+  display: flex;
+  justify-content: left;
+  width: 90%;
+  margin-left: 10%;
+  text-align: left;
+}
+.mb-4 {
+   margin-bottom: 0rem !important;}
 .container-input svg {
   position: absolute;
   top: 50%;

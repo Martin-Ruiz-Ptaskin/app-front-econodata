@@ -19,6 +19,7 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
     BadgeModule,
     DocsComponentsModule
   ]
+
 })
 export class ChartsModule {
 }

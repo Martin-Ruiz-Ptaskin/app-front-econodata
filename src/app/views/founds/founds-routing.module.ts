@@ -5,10 +5,10 @@ import {FoundsComponent} from './founds/founds.component'
 import {FoundsListComponent} from './founds-list/founds-list.component'
 const routes: Routes = [
   {
-    path: 'founds/name:',
+    path: 'founds-view/:name',
     component: FoundsComponent,
     data: {
-      title: `que nececito`
+      title: `Found view`
     }
   },
   {

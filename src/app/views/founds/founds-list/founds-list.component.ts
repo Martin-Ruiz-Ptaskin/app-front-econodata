@@ -23,8 +23,10 @@ export class FoundsListComponent implements OnInit {
     this.FoundListServiceService.getData().subscribe(
       response => {
         this.FoundsList = response.data.map((item:any) => {
+          console.log(item.id)
+
           return {
-            Fondo: {nombre:item.name,tipo:"link",accion:"/"},
+            Fondo: {nombre:item.name,tipo:"link",accion:"founds/founds-view/"+item.id},
             Ultima_modificación:  {nombre:item.date,tipo:"texto"},
 
           };
@@ -44,9 +46,8 @@ export class FoundsListComponent implements OnInit {
         console.log(response)
         this.next_Page=response.next
         this.FoundsList = this.FoundsList.concat(response.data.map((item:any) => {
-
           return {
-            Fondo: {nombre:item.name,tipo:"link",accion:"/"},
+            Fondo: {nombre:item.name,tipo:"link",accion:"founds/founds-view/"+item.id},
             Ultima_modificación:  {nombre:item.date,tipo:"texto"},
           };
         }));

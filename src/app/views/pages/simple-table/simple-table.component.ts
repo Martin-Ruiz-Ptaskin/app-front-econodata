@@ -1,6 +1,7 @@
 import { Component,Input,OnChanges,SimpleChanges,Output,EventEmitter  } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table'; // Si estás usando Angular Material
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -30,8 +31,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class SimpleTableComponent implements OnChanges {
-  @Input() displayedColumns2: string | undefined;
-  @Input() dataSource2: string | undefined;
+  //@Input() displayedColumns2: string | undefined;
+  //@Input() dataSource2: string | undefined;
   @Input() inputdataSource: any;
   @Input() nextPageBtn: boolean | undefined =false;
   @Input() titulo: string | undefined;
@@ -39,8 +40,9 @@ export class SimpleTableComponent implements OnChanges {
   pagina:number=0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource(); // Inicializa dataSource
   @Input() displayedColumns:any;
+  skeleton:Array<any> =["skeleton"]
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // Maneja las actualizaciones de las propiedades @Input
@@ -53,6 +55,11 @@ export class SimpleTableComponent implements OnChanges {
 
   }
 
+  redirect(ruta:string){
+    console.log(ruta)
+    this.router.navigate([ruta]); // Redirigir después del login
+
+  }
   sendData() {
     this.pagina++
     this.dataEmitter.emit(this.pagina);
