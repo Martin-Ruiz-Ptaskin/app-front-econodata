@@ -44,6 +44,12 @@ const routes: Routes = [
           import('./views/insider/insider.module').then((m) => m.InsiderModule)
       }
       ,
+      {
+        path: 'finanzas',
+        loadChildren: () =>
+          import('./views/finanzas/finanzas.module').then((m) => m.FinanzasModule)
+      }
+      ,
 
       {
         path: 'politician',

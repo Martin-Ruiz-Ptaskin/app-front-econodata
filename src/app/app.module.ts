@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './views/pages/pages.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 // Import app component
 import { AppComponent } from './app.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Import containers
 import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
@@ -58,8 +60,10 @@ const APP_CONTAINERS = [
     AppRoutingModule,
     AvatarModule,
     BreadcrumbModule,
+    MatDialogModule,
     FooterModule,
     HttpClientModule,
+    MatTooltipModule,
     DropdownModule,
     MatButton,
     MatButtonModule,

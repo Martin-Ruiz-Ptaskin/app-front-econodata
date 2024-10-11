@@ -1,0 +1,142 @@
+
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <!-- Step 1: Ingresos -->
+  <mat-step [stepControl]="ingresos">
+    <form [formGroup]="ingresos">
+      <ng-template matStepLabel>Ingresos</ng-template>
+
+      <div formArrayName="campos">
+        <div *ngFor="let campo of campos.controls; let i = index" [formGroupName]="i" class="lineInput">
+          <mat-form-field class="matForm">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" required>
+          </mat-form-field>
+          -
+          <mat-form-field class="matForm">
+            <mat-label>Monto</mat-label>
+            <input matInput type="number" formControlName="monto" required>
+          </mat-form-field>
+          <!-- Botón de eliminar -->
+          <button mat-icon-button color="warn" matTooltip="Eliminar campo" (click)="eliminarCampo('ingresos', i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="btn-container">
+
+          <button mat-button mat-raised-button class="btn btn-info"(click)="agregarCampo('ingresos')">Agregar Campo</button>
+        </div>
+      <div>
+        <button mat-button mat-raised-button matStepperNext class="next">Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Step 2: Gastos -->
+  <mat-step [stepControl]="gastos">
+    <form [formGroup]="gastos">
+      <ng-template matStepLabel>Gastos</ng-template>
+
+      <div formArrayName="campos">
+        <div *ngFor="let campo of gastosCampos.controls; let i = index" [formGroupName]="i" class="lineInput">
+          <mat-form-field class="matForm">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" required>
+          </mat-form-field>
+          -
+          <mat-form-field  class="matForm">
+            <mat-label>Monto</mat-label>
+            <input matInput type="number" formControlName="monto" required>
+          </mat-form-field>
+          <!-- Botón de eliminar -->
+          <button mat-icon-button color="warn" matTooltip="Eliminar campo" (click)="eliminarCampo('gastos', i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="btn-container">
+
+      <button mat-button mat-raised-button class="btn btn-info"(click)="agregarCampo('gastos')">Agregar Campo</button>
+        </div>
+      <div>
+        <button mat-button mat-raised-button matStepperNext class="next">Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Step 3: Ahorros -->
+  <mat-step [stepControl]="ahorros">
+    <form [formGroup]="ahorros">
+      <ng-template matStepLabel>Ahorros</ng-template>
+
+      <div formArrayName="campos">
+        <div *ngFor="let campo of ahorrosCampos.controls; let i = index" [formGroupName]="i" class="lineInput">
+          <mat-form-field class="matForm">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" required>
+          </mat-form-field>
+          -
+          <mat-form-field class="matForm">
+            <mat-label>Monto</mat-label>
+            <input matInput type="number" formControlName="monto" required>
+          </mat-form-field>
+          <!-- Botón de eliminar -->
+          <button mat-icon-button color="warn" matTooltip="Eliminar campo" (click)="eliminarCampo('ahorros', i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="btn-container">
+
+      <button mat-button mat-raised-button class="btn btn-info"(click)="agregarCampo('ahorros')">Agregar Campo</button>
+      </div>
+      <div>
+        <button mat-button mat-raised-button matStepperNext class="next">Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Step 4: Deudas -->
+  <mat-step [stepControl]="deudas">
+    <form [formGroup]="deudas">
+      <ng-template matStepLabel>Deudas</ng-template>
+
+      <div formArrayName="campos">
+        <div *ngFor="let campo of deudasCampos.controls; let i = index" [formGroupName]="i" class="lineInput">
+          <mat-form-field class="matForm">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" required>
+          </mat-form-field>
+          -
+          <mat-form-field class="matForm">
+            <mat-label>Monto</mat-label>
+            <input matInput type="number" formControlName="monto" required>
+          </mat-form-field>
+          <!-- Botón de eliminar -->
+          <button mat-icon-button color="warn" matTooltip="Eliminar campo" (click)="eliminarCampo('deudas', i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="btn-container">
+
+          <button mat-button mat-raised-button class="btn btn-info"(click)="agregarCampo('deudas')">Agregar Campo</button>
+        </div>
+      <div>
+        <button mat-button mat-raised-button matStepperNext class="next">Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Step 5: Done -->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-button mat-raised-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
