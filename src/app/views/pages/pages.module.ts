@@ -9,6 +9,7 @@ import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 
 
 import { SimpleTableComponent } from './simple-table/simple-table.component';
@@ -23,6 +24,7 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatTableModule,
     DocsComponentsModule,
     PagesRoutingModule,
@@ -31,7 +33,7 @@ import { DocsComponentsModule } from '@docs-components/docs-components.module';
     GridModule,
     IconModule,
     FormModule,
-   
+
   ],
   exports:[
 

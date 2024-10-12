@@ -57,7 +57,7 @@ export class SimpleTableComponent implements OnChanges {
 
   redirect(ruta:string){
     console.log(ruta)
-    this.router.navigate([ruta]); // Redirigir después del login
+    this.router.navigate([ruta], { skipLocationChange: true }); // Redirigir después del login
 
   }
   sendData() {

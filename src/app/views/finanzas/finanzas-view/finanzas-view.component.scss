@@ -3,7 +3,9 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.mat-dialog-container {
+  z-index: 10000 !important;
+}
 input[type=number] { -moz-appearance:textfield; }
 .btn-container{
   width: 50%;

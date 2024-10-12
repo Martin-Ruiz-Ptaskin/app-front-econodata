@@ -1,5 +1,26 @@
-@media (max-width: 570px) {
+.logcard{
+  display: flex;
+  flex-direction: row;
+}
+.formLog{
+  width: 100%;
+}
+.noSmall{
+  display: inline;
+}
+.justSmall{
+  display: none;
+}
+@media (max-width: 576px) {
   .register {
     width: 100% !important;
 
-  }}
+  }
+  .noSmall{
+    display: none;
+  }
+  .justSmall{
+    display: inherit;
+  }
+
+}

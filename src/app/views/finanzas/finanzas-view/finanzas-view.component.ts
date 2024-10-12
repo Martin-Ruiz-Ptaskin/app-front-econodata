@@ -1,6 +1,7 @@
 import { Component ,OnInit,inject} from '@angular/core';
 import {LoginService} from '../../common/services/login.service'
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
+import { pipe,take  } from 'rxjs';
 
 @Component({
   selector: 'app-finanzas-view',
@@ -33,7 +34,13 @@ export class FinanzasViewComponent implements OnInit {
 }
 
 ngOnInit(): void {
+  this.loginService.getLogedIn() .pipe (take(1)).subscribe (resp=>{
+  if(!resp){
+    this.loginService.openDialogLogin()
+  }
 
+  })
+//this.loginService.openDialogLogin()
 }
 // Getters para obtener los FormArrays
 get campos() {

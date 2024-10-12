@@ -25,7 +25,7 @@ FoundsList: any=[];
           console.log(item)
 
           return {
-            Nombre:  {nombre:item.name,    tipo:"link",  accion:"/"},
+            Nombre:  {nombre:item.name,    tipo:"texto",  accion:"/"},
             Ticker:  {nombre:item.asset , tipo:"texto", accion:"/"},
             partido: {nombre:item.party ,    tipo:"texto", accion:"/"},
             Fecha:   {nombre:item.pubDate ,    tipo:"texto", accion:"/"},

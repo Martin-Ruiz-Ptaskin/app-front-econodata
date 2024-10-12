@@ -1,54 +1,121 @@
 
         <c-card-group style="z-index: 1000;">
           <c-card class="p-4">
-            <c-card-body>
-              <form cForm>
+            <c-card-body *ngIf="isLoginVisible">
+              <form [formGroup]="loginForm" cForm (ngSubmit)="login()">
                 <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
+                <p class="text-medium-emphasis">Ingresa a tu cuenta</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input autoComplete="username" formControlName="email" cFormControl placeholder="Username" />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
                   <input
+                  formControlName="password"
+
                     autoComplete="current-password"
                     cFormControl
                     placeholder="Password"
                     type="password"
                   />
                 </c-input-group>
+                <p style="color: red;">{{errorLogIn}}</p>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
-                      Login
+                    <button type="submit" cButton class="px-4" color="primary">
+                      Iniciar sesión
                     </button>
                   </c-col>
                   <c-col class="text-right" xs="6">
                     <button cButton class="px-0" color="link">
-                      Forgot password?
+                      Recuperar Contraseña
+                    </button>
+                  </c-col>
+                  <c-col class="text-right justSmall"  xs="6">
+                    <button (click)="toggleForms()" style="margin-top: 5px;" cButton class="px-4" color="primary">
+                      Registrarse
                     </button>
                   </c-col>
                 </c-row>
               </form>
             </c-card-body>
+            <!--COMIENZO REGISTRRSE-->
+            <c-card-body  *ngIf="!isLoginVisible">
+              <form [formGroup]="registerForm" (ngSubmit)="register()" cForm>
+                <h1>Registrarse</h1>
+                <p class="text-medium-emphasis">Crea una cuenta</p>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input formControlName="email" autoComplete="username" cFormControl placeholder="Username" />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                  formControlName="password"
+
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    type="password"
+                  />
+                </c-input-group>
+                <p style="color: red;">{{errorRegistro}}</p>
+
+                <c-row>
+                  <c-col xs="6">
+                    <button type="submit" cButton class="px-4" color="primary">
+
+                      Registrarse
+                    </button>
+                  </c-col>
+                  <c-col class="text-right" xs="6">
+                    <button cButton class="px-0" color="link">
+                      Recuperar Contraseña
+                    </button>
+                  </c-col>
+                  <c-col class="text-right justSmall" xs="6">
+                    <button (click)="toggleForms()" style="margin-top: 5px;" cButton class="px-4" color="primary">
+                      Inicia sesión
+
+                      </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 44}" class="text-white register bg-primary py-5">
-            <c-card-body class="text-center">
+
+
+          <c-card   class= " noSmall text-white register bg-primary py-5">
+            <c-card-body *ngIf="isLoginVisible" class="text-center">
               <div>
-                <h2>Sign up</h2>
+                <h2>Registrarse</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
-                  Register Now!
+                  Crear una cuenta para acceder a más funcionalidades y notificaciones el contenido                </p>
+                <button [active]="true" (click)="toggleForms()" cButton class="mt-3" color="primary" >
+                  Registrarse!
+                </button>
+              </div>
+            </c-card-body>
+            <c-card-body *ngIf="!isLoginVisible" class="text-center">
+              <div>
+                <h2>Iniciar sesión</h2>
+                <p>
+                  Inicia seción para acceder a tu información                </p>
+                <button [active]="true" (click)="toggleForms()" cButton class="mt-3" color="primary" >
+                  Inicia sesión!
                 </button>
               </div>
             </c-card-body>
           </c-card>
+
+
         </c-card-group>

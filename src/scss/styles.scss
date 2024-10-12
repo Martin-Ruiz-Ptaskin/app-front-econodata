@@ -57,7 +57,9 @@ $enable-rtl: true;
 // If you want to add something do it here
 @import "custom";
 
-
+.sidebar.sidebar-fixed{
+  z-index: 12 !important;
+}
 .skeleton {
 	background-color: #e2e5e7;
 	// The shine that's going to move across the skeleton:
@@ -84,4 +86,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .conteinter{
   display: flex;
   width: 100vw;
+}
+::ng-deep .cdk-overlay-container, ::ng-deep .mat-dialog-container {
+  z-index: 10000 !important;
 }
