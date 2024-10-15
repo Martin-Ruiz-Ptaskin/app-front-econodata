@@ -27,7 +27,7 @@ export class InsiderListComponent implements OnInit {
         this.insiderList = response.data.map((item:any) => {
           return {
             Nombre:  {nombre:item.name,    tipo:"texto",  accion:"/"},
-            Ticker:  {nombre:item.company , tipo:"texto", accion:"/"},
+            Ticker:  {nombre:item.company , tipo:"link", accion:"/insider/ticket/"+item.company},
             Empresa: {nombre:item.clave ,    tipo:"texto", accion:"/"},
             Fecha:   {nombre:item.date ,    tipo:"texto", accion:"/"},
             Monto:   {nombre:item.amount ,  tipo:"texto", accion:"/"},

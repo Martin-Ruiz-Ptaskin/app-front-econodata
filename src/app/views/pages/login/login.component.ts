@@ -68,8 +68,9 @@ register(): void {
       }
     });
   }
-  else{        this.errorRegistro="Email y contraseña requeridos"
-  }
+  else{
+        this.errorRegistro="Email y contraseña requeridos"
+      }
 }
 
 

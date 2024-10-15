@@ -42,7 +42,10 @@ import {
 
   UtilitiesModule
 } from '@coreui/angular';
+import { FormsModule } from '@angular/forms';
 
+import { MatIcon } from '@angular/material/icon';
+import { HeaderService } from './containers/default-layout/services/header.service';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -64,6 +67,7 @@ const APP_CONTAINERS = [
     FooterModule,
     HttpClientModule,
     MatTooltipModule,
+    FormsModule,
     DropdownModule,
     MatButton,
     MatButtonModule,
@@ -74,6 +78,7 @@ const APP_CONTAINERS = [
     IconModule,
     NavModule,
     ButtonModule,
+    MatIcon,
     FormModule,
     UtilitiesModule,
     ButtonGroupModule,
@@ -94,6 +99,7 @@ const APP_CONTAINERS = [
 
     IconSetService,
     Title,
+    HeaderService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

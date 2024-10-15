@@ -1,7 +1,61 @@
 .container-input {
   position: relative;
 }
+.mostrarBusquedascont{
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  justify-content: center;
+  margin-left: 5%;
 
+
+
+}
+.itemObjet{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mostrarBusquedas{
+  padding-top: 10px;
+  width: 90%;
+  height: auto;
+  background-color: rgb(243, 243, 243);
+text-align: center;
+
+}
+.itemObjet{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mostrarBusquedas{
+  display: flex;
+  flex-direction: column;
+
+}
+.item{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.item:hover{
+  background-color: rgb(193, 191, 191);
+}
+.icono{
+  width: 10%;
+}
+.name{
+  width: 50%;
+}
+.tipo{
+  width: 40%;
+}
 .input {
   width: 350px;
   padding: 10px 0px 10px 40px;

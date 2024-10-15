@@ -26,7 +26,7 @@ FoundsList: any=[];
 
           return {
             Nombre:  {nombre:item.name,    tipo:"texto",  accion:"/"},
-            Ticker:  {nombre:item.asset , tipo:"texto", accion:"/"},
+            Ticker:  {nombre:item.asset , tipo:"link", accion:"/insider/ticket/"+item.asset},
             partido: {nombre:item.party ,    tipo:"texto", accion:"/"},
             Fecha:   {nombre:item.pubDate ,    tipo:"texto", accion:"/"},
             Monto:   {nombre:item.value ,  tipo:"texto", accion:"/"},
