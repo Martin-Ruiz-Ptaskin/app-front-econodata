@@ -32,25 +32,31 @@ export class LoginService {
 
 
 
-
   SignIn(email: string, pass: string): Observable<any> {
     const requesUrl = this.apiUrl + "login.php";
     const body = { email, pass }; // Datos de inicio de sesión
-    console.log(requesUrl)
+    console.log(requesUrl);
 
     return this.http.post<any>(requesUrl, body).pipe(
       map(response => {
-        // Verificar si el valor "ok" es true
-        if ( response.status!=200) {
-          this.error.openSnackBar( response.message ,"ok");
+        // Verificar si el valor "status" es 200 (éxito)
+        if (response.status != 200) {
+          this.error.openSnackBar(response.message, "ok");
           throw new HttpErrorResponse({ status: 400, statusText: response.message });
+        } else {
+          // Guardar email y pass en el localStorage
+          localStorage.setItem('email', email);
+          localStorage.setItem('pass', pass);
+          localStorage.setItem('id', response.idUsuario);
+
+          // Realizar las demás acciones necesarias
+          this.role = "user";
+          this.idUser= response.idUsuario
+          this.myVariableSubject.next(email);
+          this.isLogedIn = true;
+          this.closeDialog();
         }
-        else{
-          this.role="user"
-          this.myVariableSubject.next(email)
-          this.isLogedIn=true
-          this.closeDialog()
-        }
+
         // Si ok es true, devolvemos la respuesta con el rol del usuario
         return response;
       }),
@@ -59,7 +65,22 @@ export class LoginService {
         return throwError(() => error);
       })
     );
+}
+
+
+getCredentialsFromLocalStorage(){
+  console.log("se ejecuta get credeniales")
+  const email = localStorage.getItem('email');
+  const pass = localStorage.getItem('pass');
+  console.log(email,pass)
+  if(email && pass){
+    console.log("entra")
+    this.role = "user";
+          this.myVariableSubject.next(email);
+          this.isLogedIn = true;
   }
+  // Retorna un objeto con los valores obtenidos del localStorage (pueden ser null si no están guardados)
+}
   Registraese(email: string, pass: string): Observable<any> {
     const requesUrl = this.apiUrl + "registro.php";
     const body = { email, pass }; // Datos de registro
@@ -71,7 +92,13 @@ export class LoginService {
           this.error.openSnackBar( response.message ,"ok");
         }
         else{
+          localStorage.setItem('email', email);
+          localStorage.setItem('pass', pass);
+          localStorage.setItem('id', response.idUsuario);
+
           this.role="user"
+          this.idUser= response.idUsuario
+
           this.isLogedIn=true
           this.myVariableSubject.next(email)
           this.closeDialog()
@@ -87,41 +114,6 @@ export class LoginService {
   }
 
 
-  obtenerLoginPorSession(): Observable<any> {
-    console.log("se llama");
-    const requestUrl = this.apiUrl + "obtenerVariablesSession.php";
-    console.log(requestUrl);
-    return this.http.get<any>(requestUrl).pipe(
-      map(response => {
-        // Verificar la respuesta
-        console.log(response);
-        if (response.status !== 200) {
-          // Mostrar un error si el status no es 200
-          this.error.openSnackBar(response.message, "ok");
-        } else {
-          // Asignar valores si el login fue exitoso
-          this.role = "user";
-          this.isLogedIn = true;
-
-          console.log(response.idUsuario);
-          console.log(response.email);
-
-          // Asignar los valores correctamente
-          this.idUser = response.idUsuario;
-
-          // También puedes almacenar el email si es necesario
-          this.myVariableSubject.next(response.email)
-        }
-        // Devolver la respuesta
-        return response;
-      }),
-      catchError(error => {
-        // Manejo del error
-        this.error.error();
-        return throwError(() => error);
-      })
-    );
-  }
 
 
 

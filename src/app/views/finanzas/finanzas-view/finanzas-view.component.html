@@ -131,8 +131,28 @@
 
   <!-- Step 5: Done -->
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
+    <ng-template matStepLabel>Resumen</ng-template>
+
+    <p><strong>Ingresos:</strong></p>
+    <div *ngFor="let ingreso of recogerDatos().ingresos">
+      <p>Categoria: {{ ingreso.categoria }} - Monto: {{ ingreso.monto }}</p>
+    </div>
+
+    <p><strong>Gastos:</strong></p>
+    <div *ngFor="let gasto of recogerDatos().gastos">
+      <p>Categoria: {{ gasto.categoria }} - Monto: {{ gasto.monto }}</p>
+    </div>
+
+    <p><strong>Ahorros:</strong></p>
+    <div *ngFor="let ahorro of recogerDatos().ahorros">
+      <p>Categoria: {{ ahorro.categoria }} - Monto: {{ ahorro.monto }}</p>
+    </div>
+
+    <p><strong>Deudas:</strong></p>
+    <div *ngFor="let deuda of recogerDatos().deudas">
+      <p>Categoria: {{ deuda.categoria }} - Monto: {{ deuda.monto }}</p>
+    </div>
+
     <div>
       <button mat-button mat-raised-button matStepperPrevious>Back</button>
       <button mat-button mat-raised-button (click)="stepper.reset()">Reset</button>

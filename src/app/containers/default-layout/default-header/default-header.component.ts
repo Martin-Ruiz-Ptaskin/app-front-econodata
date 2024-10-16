@@ -43,7 +43,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Verificar si la ruta actual es '/'
 
-    this.login.obtenerLoginPorSession()
+    this.validarCredenciales()
 
   }
   openDialog(){
@@ -85,8 +85,8 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
       this.inputFocused = false;
     }, 100);  // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
   }
-  verLoc(){
-    this.login.obtenerLoginPorSession()
+  validarCredenciales(){
+    this.login.getCredentialsFromLocalStorage()
 
   }
 }

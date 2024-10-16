@@ -69,6 +69,7 @@ crearCampo(): FormGroup {
 
 // Función para agregar un nuevo campo
 agregarCampo(tipo: string) {
+  console.log("invoca")
   switch (tipo) {
     case 'ingresos':
       this.campos.push(this.crearCampo());
@@ -110,8 +111,12 @@ recogerDatos() {
     deudas: this.deudasCampos.value,
   };
 
-  console.log(datos);
   return datos;
+}
+finalizar(){
+  let datos =this.recogerDatos()
+    console.log(datos)
+
 }
 
 }
