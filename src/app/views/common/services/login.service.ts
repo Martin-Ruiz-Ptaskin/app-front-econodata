@@ -72,10 +72,11 @@ getCredentialsFromLocalStorage(){
   console.log("se ejecuta get credeniales")
   const email = localStorage.getItem('email');
   const pass = localStorage.getItem('pass');
+  const id=localStorage.getItem('id')
   console.log(email,pass)
   if(email && pass){
-    console.log("entra")
     this.role = "user";
+    this.idUser=id
           this.myVariableSubject.next(email);
           this.isLogedIn = true;
   }

@@ -2,6 +2,7 @@ import { Component ,OnInit,inject} from '@angular/core';
 import {LoginService} from '../../common/services/login.service'
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
 import { pipe,take  } from 'rxjs';
+import {FinanzasService} from '../service/finanzas.service'
 
 @Component({
   selector: 'app-finanzas-view',
@@ -16,10 +17,12 @@ export class FinanzasViewComponent implements OnInit {
   ahorros: FormGroup;
   deudas: FormGroup;
   isLinear = false;
-
+  message:Array<any>=[]
+  requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
 
   // Declaras la variable loginService con el prefijo private
-  constructor(private loginService: LoginService) { this.ingresos = this._formBuilder.group({
+  constructor(private loginService: LoginService,private FinanzasService:FinanzasService) {
+    this.ingresos = this._formBuilder.group({
     campos: this._formBuilder.array([this.crearCampo()])
   });
   this.gastos = this._formBuilder.group({
@@ -40,6 +43,8 @@ ngOnInit(): void {
   }
 
   })
+  this.cargarValoresIniciales();
+
 //this.loginService.openDialogLogin()
 }
 // Getters para obtener los FormArrays
@@ -60,17 +65,17 @@ get deudasCampos() {
 }
 
 // Función para crear un nuevo campo
-crearCampo(): FormGroup {
+crearCampo(valor?: { categoria: string, monto: number }) {
   return this._formBuilder.group({
-    categoria: ['', Validators.required],
-    monto: ['', Validators.required]
+    categoria: [valor ? valor.categoria : '', Validators.required],
+    monto: [valor ? valor.monto : 0, Validators.required]
   });
 }
 
 // Función para agregar un nuevo campo
-agregarCampo(tipo: string) {
+agregarCampo(categoria: string) {
   console.log("invoca")
-  switch (tipo) {
+  switch (categoria) {
     case 'ingresos':
       this.campos.push(this.crearCampo());
       break;
@@ -87,8 +92,8 @@ agregarCampo(tipo: string) {
 }
 
 // Función para eliminar un campo
-eliminarCampo(tipo: string, indice: number) {
-  switch (tipo) {
+eliminarCampo(categoria: string, indice: number) {
+  switch (categoria) {
     case 'ingresos':
       this.campos.removeAt(indice);
       break;
@@ -115,8 +120,62 @@ recogerDatos() {
 }
 finalizar(){
   let datos =this.recogerDatos()
-    console.log(datos)
+  this.requestEnviado=1
+    this.FinanzasService.MsgGPTApi(datos).subscribe((resp:any)=>{
+      if(resp.respuesta){
+        this.requestEnviado=2
+        this.message.push({sendBy:"assistant",content:resp.respuesta})
+      }
 
+    })
+
+}
+
+
+CharlaChatGptEvento(mensaje: string) {
+  console.log(mensaje)
+  this.message.push({sendBy:"user",content:mensaje})
+  this.FinanzasService.ConversacionGPTApi(this.message).subscribe((resp:any)=>{
+    console.log(resp)
+    if(resp.respuesta){
+      this.message.push({sendBy:"assistant",content:resp.respuesta})
+    }
+
+  })
+
+}
+
+cargarValoresIniciales() {
+  this.ingresos = this._formBuilder.group({
+    campos: this._formBuilder.array([
+      this.crearCampo({ categoria: 'sueldo', monto: 2200000 }),
+      this.crearCampo({ categoria: 'empresa', monto: 800000 })
+    ])
+  });
+
+  this.gastos = this._formBuilder.group({
+    campos: this._formBuilder.array([
+      this.crearCampo({ categoria: 'servicios', monto: 100000 }),
+      this.crearCampo({ categoria: 'autos', monto: 1000000 }),
+      this.crearCampo({ categoria: 'supermercado', monto: 250000 }),
+      this.crearCampo({ categoria: 'varios', monto: 100000 }),
+      this.crearCampo({ categoria: 'educación', monto: 70000 })
+    ])
+  });
+
+  this.ahorros = this._formBuilder.group({
+    campos: this._formBuilder.array([
+      this.crearCampo({ categoria: 'acciones', monto: 150000 }),
+      this.crearCampo({ categoria: 'ahorro', monto: 150000 })
+    ])
+  });
+
+  this.deudas = this._formBuilder.group({
+    campos: this._formBuilder.array([
+      this.crearCampo({ categoria: 'hipoteca', monto: 0 }),  // Suponiendo que no hay hipoteca
+      this.crearCampo({ categoria: 'tarjeta de crédito', monto: 50000 }) // Ejemplo de deuda
+    ])
+  });
 }
 
 }

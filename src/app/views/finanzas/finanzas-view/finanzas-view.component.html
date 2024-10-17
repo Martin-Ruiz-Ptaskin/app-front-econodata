@@ -154,9 +154,16 @@
     </div>
 
     <div>
-      <button mat-button mat-raised-button matStepperPrevious>Back</button>
-      <button mat-button mat-raised-button (click)="stepper.reset()">Reset</button>
+      <button mat-button mat-raised-button class="btn btn-info"(click)="finalizar()">Enviar</button>
+
     </div>
   </mat-step>
 </mat-stepper>
 
+
+<div  class="userinfo">
+  <app-chat [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+
+
+
+</div>
