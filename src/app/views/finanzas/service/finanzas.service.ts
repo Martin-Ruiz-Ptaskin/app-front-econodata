@@ -19,8 +19,7 @@ export class FinanzasService {
   //no se me ocurrio como sacar el prompt de aca para la cola de msj
   private msjEnviados:Array<any>=[{
     'role' : 'system',
-    'content' :'Devuelve un hola para probar'}
-];
+    'content' :'Eres un asesor financiero con más de 15 años de experiencia en la revisión y optimización de la situación financiera de individuos y familias. Tu especialidad es proporcionar asesoría personalizada que abarca desde la creación de fondos de emergencia hasta la diversificación de inversiones. Tu tarea es revisar la información financiera que se te proporcione a continuación y ofrecer recomendaciones concretas sobre cómo mejorar la situación financiera del cliente. Aquí están los datos que necesitas considerar: los datos recibidos Ten en cuenta que las recomendaciones deben ser prácticas y adaptadas a la situación específica del cliente, abarcando aspectos como la reducción de deudas, la optimización de ahorros y estrategias de inversión. Al final de tu respuesta, incluye algunas preguntas que el cliente podría hacer para profundizar en sus opciones financieras. Por favor, proporciona una revisión completa y asegurándote de cuidadosamente considerar todos los datos proporcionados para ofrecer las mejores soluciones adaptadas a la situación del cliente.'  }];
   private uuid:string=""
 
 
@@ -28,7 +27,7 @@ export class FinanzasService {
     let id=this.loginService.getId()
     console.log(id)
     const requesUrl = this.apiUrl + "revision.php";
-    this.msjEnviados.push({sendBy:"user",content:data})
+    this.msjEnviados.push({role:"user",content:data})
     const body = { consulta:data,idUsuario: id}; // Datos de inicio de sesión
     this.myVariableSubject.next(true)
 

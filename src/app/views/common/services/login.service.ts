@@ -45,10 +45,12 @@ export class LoginService {
           throw new HttpErrorResponse({ status: 400, statusText: response.message });
         } else {
           // Guardar email y pass en el localStorage
+
+         /*
           localStorage.setItem('email', email);
           localStorage.setItem('pass', pass);
           localStorage.setItem('id', response.idUsuario);
-
+          */
           // Realizar las demás acciones necesarias
           this.role = "user";
           this.idUser= response.idUsuario

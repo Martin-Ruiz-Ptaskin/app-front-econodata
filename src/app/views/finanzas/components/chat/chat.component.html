@@ -10,6 +10,10 @@
                   <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                     <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
                   </a>
+                  <div class="text">
+                    <h6>                  Análisis de tus gastos
+                    </h6>
+                    </div>
                 </div>
               </div>
             </div>
@@ -18,7 +22,7 @@
               <ul class="m-b-0">
                 <!-- Iterar sobre los mensajes -->
                 <li *ngFor="let message of message" class="clearfix">
-                  <div [ngClass]="getMessageClass(message.sendBy)">
+                  <div [ngClass]="getMessageClass(message.role)">
                     {{ message.content }}
                   </div>
                 </li>

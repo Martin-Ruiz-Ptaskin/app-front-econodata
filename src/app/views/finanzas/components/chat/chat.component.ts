@@ -15,13 +15,15 @@ export class ChatComponent {
   newMessage:string="";
 sendMessage() {
     this.messageOut.emit(this.newMessage);
-    console.log(this.message)
   }
 
 
   // Método para determinar la clase basada en el remitente
-  getMessageClass(sendBy: string): string {
-    return sendBy === 'user' ? 'message other-message float-right ' : 'message my-message';
+  getMessageClass(role: string): string {
+    console.log(this.message)
+
+    console.log(role)
+    return role === 'user' ? 'message other-message float-right ' : 'message my-message';
   }
 
 }

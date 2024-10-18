@@ -11,14 +11,21 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import { ChatComponent } from './components/chat/chat.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {SankeyComponent} from './components/sankey/sankey.component';
+import { ChartsComponent } from '../charts/charts.component';
+import { CardModule, GridModule } from '@coreui/angular';
+import { ChartjsModule } from '@coreui/angular-chartjs';
 @NgModule({
-  declarations: [FinanzasViewComponent,ChatComponent],
+  declarations: [FinanzasViewComponent,ChatComponent,SankeyComponent],
   imports: [
     CommonModule,
     finanzasRoutingModule,
     MatTooltipModule,
     MatInputModule,
     FormsModule,
+    CardModule,
+    GridModule,
+    ChartjsModule,
     MatFormFieldModule,
     MatStepperModule,
     MatButtonModule,

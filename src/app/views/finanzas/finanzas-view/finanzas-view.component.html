@@ -161,9 +161,35 @@
 </mat-stepper>
 
 
-<div  class="userinfo">
-  <app-chat [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+<div  class="userinfo" *ngIf="requestEnviado>=1">
 
 
+
+        <app-chat   [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+
+<c-row>
+
+  <c-col xs="12" lg="6"  >
+    <c-card class="mb-4">
+      <c-card-header>
+        Flujo  del tus ingresos
+
+      </c-card-header>
+      <c-card-body>
+        <app-sankey  [finances]="finances"></app-sankey>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Distribución del tus gastos
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="doughnut" [data]="chartDoughnutData"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
 
 </div>

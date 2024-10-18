@@ -3,7 +3,7 @@ import {LoginService} from '../../common/services/login.service'
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
 import { pipe,take  } from 'rxjs';
 import {FinanzasService} from '../service/finanzas.service'
-
+import {FunctionsService} from '../../common/services/functions.service'
 @Component({
   selector: 'app-finanzas-view',
 
@@ -17,11 +17,13 @@ export class FinanzasViewComponent implements OnInit {
   ahorros: FormGroup;
   deudas: FormGroup;
   isLinear = false;
+  chartDoughnutData:any
   message:Array<any>=[]
+  finances:any
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
 
   // Declaras la variable loginService con el prefijo private
-  constructor(private loginService: LoginService,private FinanzasService:FinanzasService) {
+  constructor(private loginService: LoginService,private FinanzasService:FinanzasService,private FunctionsService:FunctionsService) {
     this.ingresos = this._formBuilder.group({
     campos: this._formBuilder.array([this.crearCampo()])
   });
@@ -119,12 +121,16 @@ recogerDatos() {
   return datos;
 }
 finalizar(){
+
   let datos =this.recogerDatos()
+  this.finances=this.recogerDatos()
+  this.chartDoughnutData=this.crearGraficoTorta(datos.gastos)
+  console.log(this.chartDoughnutData)
   this.requestEnviado=1
     this.FinanzasService.MsgGPTApi(datos).subscribe((resp:any)=>{
       if(resp.respuesta){
         this.requestEnviado=2
-        this.message.push({sendBy:"assistant",content:resp.respuesta})
+        this.message.push({role:"assistant",content:resp.respuesta})
       }
 
     })
@@ -132,13 +138,45 @@ finalizar(){
 }
 
 
+crearGraficoTorta(data:any){
+  let totalValue = 0;
+  const colores=this.FunctionsService.generarColoresPastel((data.length/2))
+  const chartDoughnutData = {
+    labels: [] as string[],
+    datasets: [
+      {
+        backgroundColor:colores, // Colores personalizados
+        data: [] as number[],
+      }
+    ]
+  };
+  data.forEach((item: any) => {
+    totalValue += item.monto;
+  });
+  const activosConPorcentaje = data.map((item: any) => {
+
+    const percentage = (item.monto / totalValue) * 100;
+    return {
+      name: item.categoria,
+      percentage: percentage
+    };
+  });
+  activosConPorcentaje.forEach((item: any) => {
+    chartDoughnutData.labels.push(item.name);
+    chartDoughnutData.datasets[0].data.push(parseFloat(item.percentage.toFixed(2))); // Redondear a 2 decimales
+  });
+
+return chartDoughnutData
+
+}
+
 CharlaChatGptEvento(mensaje: string) {
   console.log(mensaje)
-  this.message.push({sendBy:"user",content:mensaje})
+  this.message.push({role:"user",content:mensaje})
   this.FinanzasService.ConversacionGPTApi(this.message).subscribe((resp:any)=>{
     console.log(resp)
     if(resp.respuesta){
-      this.message.push({sendBy:"assistant",content:resp.respuesta})
+      this.message.push({role:"assistant",content:resp.respuesta})
     }
 
   })
