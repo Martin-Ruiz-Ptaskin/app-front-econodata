@@ -15,6 +15,7 @@ export class ChatComponent {
   newMessage:string="";
 sendMessage() {
     this.messageOut.emit(this.newMessage);
+    this.newMessage=""
   }
 
 

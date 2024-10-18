@@ -22,17 +22,26 @@
               <ul class="m-b-0">
                 <!-- Iterar sobre los mensajes -->
                 <li *ngFor="let message of message" class="clearfix">
-                  <div [ngClass]="getMessageClass(message.role)">
-                    {{ message.content }}
+                  <div [ngClass]="getMessageClass(message.role)" [innerHTML]="message.content">
+
                   </div>
                 </li>
+                <!--
+                <div class="load-wrapp">
+                  <div class="load-3">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                  </div>
+                </div>-->
+
               </ul>
             </div>
 
             <div class="chat-message clearfix">
               <div class="input-group mb-0">
 
-                <input type="text" [(ngModel)]="newMessage" class="form-control" placeholder="Enter text here...">
+                <input  type="text" [(ngModel)]="newMessage" class="form-control" placeholder="Enter text here...">
                 <div class="input-group-prepend">
                   <button class="button" (click)="sendMessage()">Send</button>
                 </div>

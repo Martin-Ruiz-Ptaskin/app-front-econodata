@@ -165,7 +165,7 @@
 
 
 
-        <app-chat   [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+        <app-chat   *ngIf="requestEnviado>1" [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
 
 <c-row>
 
