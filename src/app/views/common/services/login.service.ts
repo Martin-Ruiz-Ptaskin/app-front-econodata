@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {LoginComponent} from '../../pages/login/login.component'
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient,HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable,throwError,of ,BehaviorSubject  } from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ErrorHttpsService} from '../../common/services/error-https.service';
 import { catchError, map } from 'rxjs/operators';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +18,9 @@ export class LoginService {
   private myVariableSubject = new BehaviorSubject<string>(''); // Creamos un BehaviorSubject
   userName$ = this.myVariableSubject.asObservable(); // Creamos un observable a partir del BehaviorSubject
   role:any
-  constructor(public dialog: MatDialog,private http: HttpClient,private error:ErrorHttpsService) {}
+  constructor(public dialog: MatDialog,private http: HttpClient,private error:ErrorHttpsService,private oauthService:OAuthService,private router: Router) {
+    this.GoogleLoginConfig()
+  }
   idUser:any;
   enviarMensaje(){
     console.log("llego")
@@ -75,7 +80,6 @@ getCredentialsFromLocalStorage(){
   const email = localStorage.getItem('email');
   const pass = localStorage.getItem('pass');
   const id=localStorage.getItem('id')
-  console.log(email,pass)
   if(email && pass){
     this.role = "user";
     this.idUser=id
@@ -120,15 +124,105 @@ getCredentialsFromLocalStorage(){
 
 
 
+//@Params
+  openDialogLogin(delay:boolean) {
 
-  openDialogLogin() {
-    this.dialog.open(LoginComponent, {
-maxWidth:'800px',
-      data: { /* puedes pasar datos aquí */ }
-    });
+    if(delay){
+      setTimeout(() => {
+        if(!this.isLogedIn){
+           this.dialog.open(LoginComponent, {
+                maxWidth:'800px',
+                data: { /* puedes pasar datos aquí */ }
+              });
+
+            }    }, 10000);
+    }
+
+    else{
+        if(!this.isLogedIn){
+          this.dialog.open(LoginComponent, {
+          maxWidth:'800px',
+          data: { /* puedes pasar datos aquí */ }
+            });
+
+          }
+        }
+
+
   }
 
   closeDialog(){
     this.dialog.closeAll()
   }
+
+
+
+  SaveGoogleUser(email: string): Observable<any> {
+    const requesUrl = this.apiUrl + "loginGoogle.php";
+    const body = { email }; // Datos de inicio de sesión
+    console.log(requesUrl);
+
+    return this.http.post<any>(requesUrl, body).pipe(
+      map(response => {
+        console.log(response)
+        // Verificar si el valor "status" es 200 (éxito)
+        if (response.status != 200) {
+          this.error.openSnackBar(response.message, "ok");
+          throw new HttpErrorResponse({ status: 400, statusText: response.message });
+        } else {
+          // Guardar email y pass en el localStorage
+        }
+
+        // Si ok es true, devolvemos la respuesta con el rol del usuario
+        return response;
+      }),
+      catchError(error => {
+        this.error.error();
+        return throwError(() => error);
+      })
+    );
+}
+
+
+GoogleLoginConfig(){
+  const config: AuthConfig = {
+    issuer: 'https://accounts.google.com',
+    strictDiscoveryDocumentValidation: false,
+    clientId: '850910230302-sgorn3o2cgl03pks7vaj8bvt6tq6dejg.apps.googleusercontent.com',
+    redirectUri: window.location.origin +this.router.url,
+    scope: 'openid profile email',
+  }
+  this.oauthService.configure(config);
+    this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  GoogleLogin() {
+    this.oauthService.initLoginFlow();
+  }
+
+  logout() {
+    this.oauthService.logOut();
+  }
+
+  getProfile() {
+    console.log(this.oauthService.getIdentityClaims())
+    return this.oauthService.getIdentityClaims();
+  }
+
+  validarLoginGoogle(){
+      const datosGoogle=this.oauthService.getIdentityClaims()
+      if(datosGoogle){
+        console.log(datosGoogle['email'])
+        this.isLogedIn=true;
+        this.SaveGoogleUser(datosGoogle['email']).subscribe((resp:any)=>{
+        this.idUser=resp.id;
+        this.myVariableSubject.next(datosGoogle['email'])
+
+        })
+
+      }
+
+    }
+
 }

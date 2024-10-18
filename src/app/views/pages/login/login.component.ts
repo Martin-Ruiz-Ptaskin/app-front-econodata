@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../common/services/login.service'; // Asegúrate de importar el servicio correctamente
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +14,7 @@ export class LoginComponent {
   errorLogIn:string=""
   errorRegistro:string="";
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService ) {
     // Inicializa los formularios
     this.loginForm = this.fb.group({
       email: ['', [Validators.required,Validators.email]],
@@ -31,9 +30,13 @@ export class LoginComponent {
   this.isLoginVisible=!this.isLoginVisible
 }
 
+loginGoogle():void{
+this.loginService.GoogleLogin()
+}
+
+
 login(): void {
-  console.log(this.loginForm.valid)
-  console.log(this.loginForm.value)
+
   if (this.loginForm.valid) {
     console.log("entra")
     const { email, password } = this.loginForm.value;
@@ -72,7 +75,6 @@ register(): void {
         this.errorRegistro="Email y contraseña requeridos"
       }
 }
-
 
 
 }

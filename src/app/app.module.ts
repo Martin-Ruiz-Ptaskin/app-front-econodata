@@ -7,6 +7,7 @@ import { PagesModule } from './views/pages/pages.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +49,7 @@ import { MatIcon } from '@angular/material/icon';
 import { HeaderService } from './containers/default-layout/services/header.service';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatMenuModule} from '@angular/material/menu';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -61,8 +63,10 @@ const APP_CONTAINERS = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MatMenuModule,
     AvatarModule,
     BreadcrumbModule,
+    OAuthModule.forRoot(),
     MatDialogModule,
     FooterModule,
     HttpClientModule,

@@ -39,12 +39,9 @@ export class FinanzasViewComponent implements OnInit {
 }
 
 ngOnInit(): void {
-  this.loginService.getLogedIn() .pipe (take(1)).subscribe (resp=>{
-  if(!resp){
-    this.loginService.openDialogLogin()
-  }
 
-  })
+  this.loginService.openDialogLogin(true)
+
   this.cargarValoresIniciales();
 
 //this.loginService.openDialogLogin()

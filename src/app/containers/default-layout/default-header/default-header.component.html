@@ -55,10 +55,26 @@
     <c-header-nav style="width: 15%; justify-content: space-around;" class="d-none d-lg-flex">
 
       <c-nav-item>
-        <a (click)="openDialog()"  cNavLink>
-          <svg cIcon name="cilUser" size="lg"></svg>
-          {{user}}
-        </a>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>person</mat-icon> <p>{{user}}</p>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="openDialog()" mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span>Registraese</span>
+            </button>
+            <button (click)="cerrarSesion()" mat-menu-item disabled>
+              <mat-icon>close</mat-icon>
+              <span>Cerrar sesión</span>
+            </button>
+            <button (click)="verSesion()" mat-menu-item >
+              <mat-icon>close</mat-icon>
+              <span>verSesion</span>
+            </button>
+
+          </mat-menu>
+
 
       </c-nav-item>
 

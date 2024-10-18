@@ -37,23 +37,29 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     });
     super();
 
+    this.validarCredenciales()
+    this.login.validarLoginGoogle()
 
   }
 
   ngOnInit(): void {
     // Verificar si la ruta actual es '/'
 
-    this.validarCredenciales()
 
   }
   openDialog(){
-    if( this.login.isLogedIn){
 
-    }
-    else{    this.login.openDialogLogin()
-    }
+    this.login.openDialogLogin(true)
 
 
+
+  }
+  cerrarSesion(){
+    this.login.logout()
+  }
+
+  verSesion(){
+    this.login.getProfile()
   }
   onInputChange(value: string): void {
 
