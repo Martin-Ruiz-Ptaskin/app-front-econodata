@@ -203,6 +203,9 @@ GoogleLoginConfig(){
 
   logout() {
     this.oauthService.logOut();
+    this.myVariableSubject.next("")
+    this.isLogedIn=false;
+
   }
 
   getProfile() {
@@ -211,7 +214,10 @@ GoogleLoginConfig(){
   }
 
   validarLoginGoogle(){
+    console.log("llega a validar login google")
       const datosGoogle=this.oauthService.getIdentityClaims()
+      console.log(datosGoogle['email'])
+
       if(datosGoogle){
         console.log(datosGoogle['email'])
         this.isLogedIn=true;

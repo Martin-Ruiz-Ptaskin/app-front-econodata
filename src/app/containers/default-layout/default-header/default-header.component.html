@@ -28,13 +28,13 @@
         <div *ngIf="listaBarra.length>0 && inputFocused" class="mostrarBusquedas">
           <div *ngFor="let item of listaBarra" class="item">
             <div class="icono itemObjet" >
-              <mat-icon *ngIf="item.tipo=='Insider'" >account_circle</mat-icon>
+              <mat-icon  *ngIf="item.tipo=='Insider'" >account_circle</mat-icon>
               <mat-icon *ngIf="item.tipo=='Político'" >account_circle</mat-icon>
               <mat-icon *ngIf="item.tipo=='Fondo de inversión'" >account_balance</mat-icon>
               <mat-icon *ngIf="item.tipo=='Activo'" >attach_money</mat-icon>
 
           </div>
-            <div  class="name itemObjet">
+            <div  [routerLink]="obtnerRuta(item)"  class="name itemObjet">
               {{item.dato}}
             </div>
             <p style="font-size: 40px;">|</p>
@@ -51,20 +51,21 @@
       </div>
 
     </c-header-nav>
-
+    <p style="font-size: 15px;"></p>
     <c-header-nav style="width: 15%; justify-content: space-around;" class="d-none d-lg-flex">
 
       <c-nav-item>
 
+
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>person</mat-icon> <p>{{user}}</p>
+            <mat-icon [ngStyle]="{'color': color}">person</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button (click)="openDialog()" mat-menu-item>
               <mat-icon>person</mat-icon>
-              <span>Registraese</span>
+              <span>{{user?user:"registrarse"}}</span>
             </button>
-            <button (click)="cerrarSesion()" mat-menu-item disabled>
+            <button (click)="cerrarSesion()" mat-menu-item >
               <mat-icon>close</mat-icon>
               <span>Cerrar sesión</span>
             </button>

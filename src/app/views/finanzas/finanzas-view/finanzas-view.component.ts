@@ -40,7 +40,6 @@ export class FinanzasViewComponent implements OnInit {
 
 ngOnInit(): void {
 
-  this.loginService.openDialogLogin(true)
 
   this.cargarValoresIniciales();
 

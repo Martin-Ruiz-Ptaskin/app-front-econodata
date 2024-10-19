@@ -27,32 +27,65 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   icons = { cilArrowLeft };
   user:string=""
   inputFocused:boolean=false
+  color:string="red"
    truncateTo8 = (value: string): string => value.length > 8 ? value.slice(0, 8) : value;
 
   constructor(public dialog: MatDialog,private classToggler: ClassToggleService,private location: Location,   private router: Router,private login:LoginService,private headerService :HeaderService ) {
-    login.userName$. subscribe(value => {
 
-      this.user =this.truncateTo8(value) ;
-      console.log('El valor de la variable ha cambiado:', value);
-    });
     super();
+    console.log("entra")
 
     this.validarCredenciales()
-    this.login.validarLoginGoogle()
+
 
   }
 
   ngOnInit(): void {
     // Verificar si la ruta actual es '/'
 
+    setTimeout(() => {
+      this.login.validarLoginGoogle()
+
+    }, 1000);
+
+    setTimeout(() => {
+      this.login.openDialogLogin(false)
+    }, 7000);
+
+    this.login.userName$. subscribe(value => {
+      if(value){      this.color="green"
+      }
+      else{
+        this.color="red"
+      }
+      this.user =this.truncateTo8(value) ;
+      console.log('El valor de la variable ha cambiado:', value);
+    });
 
   }
   openDialog(){
 
-    this.login.openDialogLogin(true)
+
+    this.login.openDialogLogin(false)
 
 
 
+  }
+  obtnerRuta (item:any):string{
+    console.log(item)
+    let path:string="";
+    switch (item.tipo) {
+      case "Activo":
+        path = "insider/ticket/" + item.dato;
+        break;
+      case "Fondo de inversión":
+        path = "founds/founds-view/" + item.dato;
+        break;
+      default:
+        path = "";
+        break;
+    }
+return path
   }
   cerrarSesion(){
     this.login.logout()
@@ -64,16 +97,22 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   onInputChange(value: string): void {
 
     this.headerService.getBarraBusqueda(value).subscribe((resp: any) => {
-      this.listaBarra = resp.data.map((item: any) => {
+      this.listaBarra = resp.data.filter((item: any) => item.tipo !== "insider" && item.tipo !== "politician")
+
+
+      .map((item: any) => {
         if (item.tipo === "fund") {
           item.tipo = "Fondo de inversión"; // Usar "=" en lugar de "=="
-        } else if (item.tipo === "politician") {
-          item.tipo = "Político";
-        } else if (item.tipo === "insider") {
-          item.tipo = "Insider";
         } else if (item.tipo === "activo") {
           item.tipo = "Activo"; // Aquí también corregido
         }
+/*
+        else if (item.tipo === "politician") {
+          item.tipo = "Político";
+        } else if (item.tipo === "insider") {
+          item.tipo = "Insider";
+        }
+        */
         return item; // Retornar el objeto modificado
       });
 
