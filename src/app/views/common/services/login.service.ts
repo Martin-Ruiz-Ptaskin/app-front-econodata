@@ -22,8 +22,8 @@ export class LoginService {
     this.GoogleLoginConfig()
   }
   idUser:any;
+  loginModalOpen:boolean=false
   enviarMensaje(){
-    console.log("llego")
   }
   getLogedIn() :Observable<boolean>{
     return of(this.isLogedIn)
@@ -40,7 +40,6 @@ export class LoginService {
   SignIn(email: string, pass: string): Observable<any> {
     const requesUrl = this.apiUrl + "login.php";
     const body = { email, pass }; // Datos de inicio de sesión
-    console.log(requesUrl);
 
     return this.http.post<any>(requesUrl, body).pipe(
       map(response => {
@@ -51,11 +50,10 @@ export class LoginService {
         } else {
           // Guardar email y pass en el localStorage
 
-         /*
+
           localStorage.setItem('email', email);
-          localStorage.setItem('pass', pass);
           localStorage.setItem('id', response.idUsuario);
-          */
+
           // Realizar las demás acciones necesarias
           this.role = "user";
           this.idUser= response.idUsuario
@@ -75,23 +73,23 @@ export class LoginService {
 }
 
 
-getCredentialsFromLocalStorage(){
-  console.log("se ejecuta get credeniales")
-  const email = localStorage.getItem('email');
-  const pass = localStorage.getItem('pass');
-  const id=localStorage.getItem('id')
-  if(email && pass){
+getCredentialsFromLocalStorage():boolean{
+  const email = localStorage.getItem('email') ?? '';  // Si es null, se asigna una cadena vacía
+  const id = localStorage.getItem('id') ?? '';
+  if(email!="undefined" && id!="undefined"){
     this.role = "user";
     this.idUser=id
-          this.myVariableSubject.next(email);
-          this.isLogedIn = true;
+    this.myVariableSubject.next(email);
+    this.isLogedIn = true;
+    return true
   }
+  else{ return false}
+
   // Retorna un objeto con los valores obtenidos del localStorage (pueden ser null si no están guardados)
 }
   Registraese(email: string, pass: string): Observable<any> {
     const requesUrl = this.apiUrl + "registro.php";
     const body = { email, pass }; // Datos de registro
-    console.log(requesUrl)
     return this.http.post<any>(requesUrl, body).pipe(
       map(response => {
         // Verificar si el valor "ok" es true
@@ -100,7 +98,6 @@ getCredentialsFromLocalStorage(){
         }
         else{
           localStorage.setItem('email', email);
-          localStorage.setItem('pass', pass);
           localStorage.setItem('id', response.idUsuario);
 
           this.role="user"
@@ -126,27 +123,40 @@ getCredentialsFromLocalStorage(){
 
 //@Params
   openDialogLogin(delay:boolean) {
+    console.log((!this.isLogedIn && !this.loginModalOpen))
+    if(!this.isLogedIn && !this.loginModalOpen){
+      this.loginModalOpen=true
 
     if(delay){
       setTimeout(() => {
-        if(!this.isLogedIn){
-           this.dialog.open(LoginComponent, {
+
+          const dialogRef= this.dialog.open(LoginComponent, {
                 maxWidth:'800px',
                 data: { /* puedes pasar datos aquí */ }
               });
+              dialogRef.afterClosed().subscribe(result => {
+                this.loginModalOpen=false
+                // Aquí puedes manejar el resultado del diálogo si hay algún dato retornado
+              });
 
-            }    }, 10000);
+
+
+
+          }, 10000);
+
     }
 
     else{
-        if(!this.isLogedIn){
-          this.dialog.open(LoginComponent, {
-          maxWidth:'800px',
-          data: { /* puedes pasar datos aquí */ }
-            });
-
+      const dialogRef= this.dialog.open(LoginComponent, {
+        maxWidth:'800px',
+        data: { /* puedes pasar datos aquí */ }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.loginModalOpen=false
+        // Aquí puedes manejar el resultado del diálogo si hay algún dato retornado
+      });
           }
-        }
+    }
 
 
   }
@@ -160,17 +170,24 @@ getCredentialsFromLocalStorage(){
   SaveGoogleUser(email: string): Observable<any> {
     const requesUrl = this.apiUrl + "loginGoogle.php";
     const body = { email }; // Datos de inicio de sesión
-    console.log(requesUrl);
 
     return this.http.post<any>(requesUrl, body).pipe(
       map(response => {
-        console.log(response)
         // Verificar si el valor "status" es 200 (éxito)
         if (response.status != 200) {
           this.error.openSnackBar(response.message, "ok");
           throw new HttpErrorResponse({ status: 400, statusText: response.message });
         } else {
           // Guardar email y pass en el localStorage
+          let id =response.data.id
+          let mail = response.data.email
+          localStorage.setItem('email', response.data.email);
+            localStorage.setItem('id', response.data.id);
+            this.role="user"
+            this.idUser= id
+
+            this.isLogedIn=true
+            this.myVariableSubject.next(mail)
         }
 
         // Si ok es true, devolvemos la respuesta con el rol del usuario
@@ -210,25 +227,32 @@ GoogleLoginConfig(){
 
   getProfile() {
     console.log(this.oauthService.getIdentityClaims())
+    console.log(this.idUser)
     return this.oauthService.getIdentityClaims();
   }
 
   validarLoginGoogle(){
-    console.log("llega a validar login google")
-      const datosGoogle=this.oauthService.getIdentityClaims()
-      console.log(datosGoogle['email'])
+    console.log(this.getCredentialsFromLocalStorage())
+    if(!this.getCredentialsFromLocalStorage()){
+        const datosGoogle=this.oauthService.getIdentityClaims()
 
       if(datosGoogle){
-        console.log(datosGoogle['email'])
         this.isLogedIn=true;
         this.SaveGoogleUser(datosGoogle['email']).subscribe((resp:any)=>{
-        this.idUser=resp.id;
-        this.myVariableSubject.next(datosGoogle['email'])
+          if(resp){
+            console.log(resp)
+            localStorage.setItem('email', datosGoogle['email']);
+            localStorage.setItem('id', resp.data.id);
+            this.idUser=resp.data.id;
+            this.myVariableSubject.next(datosGoogle['email'])
+          }
+
 
         })
 
       }
 
     }
+  }
 
 }

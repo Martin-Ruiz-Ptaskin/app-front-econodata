@@ -161,15 +161,15 @@
 </mat-stepper>
 
 
-<div  class="userinfo" *ngIf="requestEnviado>=1">
+<div id="content"  class="userinfo" *ngIf="requestEnviado>=1">
 
 
 
-        <app-chat   *ngIf="requestEnviado>1" [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+        <app-chat  id="view" *ngIf="requestEnviado>=1" [IsLoading]="isLoading" [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
 
 <c-row>
 
-  <c-col xs="12" lg="6"  >
+  <c-col  xs="12" lg="6"  >
     <c-card class="mb-4">
       <c-card-header>
         Flujo  del tus ingresos
@@ -193,3 +193,4 @@
 </c-row>
 
 </div>
+

@@ -1,4 +1,4 @@
-import { Component ,OnInit,inject} from '@angular/core';
+import { Component ,OnInit,inject,ElementRef, ViewChild,Renderer2} from '@angular/core';
 import {LoginService} from '../../common/services/login.service'
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule,FormGroup,FormArray } from '@angular/forms';
 import { pipe,take  } from 'rxjs';
@@ -12,6 +12,8 @@ import {FunctionsService} from '../../common/services/functions.service'
 })
 export class FinanzasViewComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
+  @ViewChild('bottom') bottomDiv!: ElementRef; // Referencia al div con id="bottom"
+
   ingresos: FormGroup;
   gastos: FormGroup;
   ahorros: FormGroup;
@@ -21,9 +23,10 @@ export class FinanzasViewComponent implements OnInit {
   message:Array<any>=[]
   finances:any
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
+  isLoading:boolean=false
 
   // Declaras la variable loginService con el prefijo private
-  constructor(private loginService: LoginService,private FinanzasService:FinanzasService,private FunctionsService:FunctionsService) {
+  constructor(private renderer: Renderer2, private el: ElementRef,private loginService: LoginService,private FinanzasService:FinanzasService,private FunctionsService:FunctionsService) {
     this.ingresos = this._formBuilder.group({
     campos: this._formBuilder.array([this.crearCampo()])
   });
@@ -42,6 +45,9 @@ ngOnInit(): void {
 
 
   this.cargarValoresIniciales();
+  this.FinanzasService.ConsultaEnCurso$.subscribe((resp:boolean)=>{
+    this.isLoading=resp;
+  })
 
 //this.loginService.openDialogLogin()
 }
@@ -117,19 +123,29 @@ recogerDatos() {
   return datos;
 }
 finalizar(){
+  if(this.loginService.isLogedIn){
+    let datos =this.recogerDatos()
+    this.finances=this.recogerDatos()
+    this.chartDoughnutData=this.crearGraficoTorta(datos.gastos)
+    console.log(this.chartDoughnutData)
+    this.requestEnviado=1
+    this.scrollToBottom();
+      this.FinanzasService.MsgGPTApi(datos).subscribe((resp:any)=>{
 
-  let datos =this.recogerDatos()
-  this.finances=this.recogerDatos()
-  this.chartDoughnutData=this.crearGraficoTorta(datos.gastos)
-  console.log(this.chartDoughnutData)
-  this.requestEnviado=1
-    this.FinanzasService.MsgGPTApi(datos).subscribe((resp:any)=>{
-      if(resp.respuesta){
-        this.requestEnviado=2
-        this.message.push({role:"assistant",content:resp.respuesta})
-      }
+        if(resp.respuesta){
+          this.requestEnviado=2
+          this.message.push({role:"assistant",content:resp.respuesta})
+        }
 
-    })
+      })
+
+  }
+  else{
+    this.loginService.openDialogLogin(false)
+  }
+
+
+
 
 }
 
@@ -211,5 +227,16 @@ cargarValoresIniciales() {
     ])
   });
 }
-
+scrollToBottom(): void {
+  try {
+    setTimeout(() => {
+      const bottomElement = this.el.nativeElement.querySelector('#view');
+      if (bottomElement) {
+        bottomElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300); // Ajusta el tiempo si es necesario (100 ms por defecto)
+  } catch (err) {
+    console.error('Error al hacer scroll:', err);
+  }
+}
 }

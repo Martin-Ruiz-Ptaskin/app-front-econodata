@@ -26,19 +26,15 @@
                 </c-input-group>
                 <p style="color: red;">{{errorLogIn}}</p>
                 <c-row>
-                  <c-col xs="6">
-                    <button type="submit" cButton class="px-4" color="primary">
+                  <c-col xs="12">
+                    <button type="submit" cButton class=" btn btn-lg  " color="primary">
                       Iniciar sesión
                     </button>
-                    <button type="button" class="btn btn-lg btn-google btn-block text-uppercase btn-outline" (click)="loginGoogle()">
+                    <button type="button" style="margin-left: 5px;" class="btn btn-lg btn-google btn-block text-uppercase btn-outline" (click)="loginGoogle()">
                       <img src="https://img.icons8.com/color/22/000000/google-logo.png"> Sing in Google
-                  </button>
-                  </c-col>
-                  <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
-                      Recuperar Contraseña
                     </button>
                   </c-col>
+
                   <c-col class="text-right justSmall"  xs="6">
                     <button (click)="toggleForms()" style="margin-top: 5px;" cButton class="px-4" color="primary">
                       Registrarse
@@ -74,15 +70,12 @@
                 <p style="color: red;">{{errorRegistro}}</p>
 
                 <c-row>
-                  <c-col xs="6">
-                    <button type="submit" cButton class="px-4" color="primary">
-
-                      Registrarse
+                  <c-col xs="12">
+                    <button type="submit" cButton class=" btn btn-lg  " color="primary">
+                      Iniciar sesión
                     </button>
-                  </c-col>
-                  <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
-                      Recuperar Contraseña
+                    <button type="button" style="margin-left: 5px;" class="btn btn-lg btn-google btn-block text-uppercase btn-outline" (click)="loginGoogle()">
+                      <img src="https://img.icons8.com/color/22/000000/google-logo.png"> Sing in Google
                     </button>
                   </c-col>
                   <c-col class="text-right justSmall" xs="6">

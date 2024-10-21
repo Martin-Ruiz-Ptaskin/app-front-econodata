@@ -33,7 +33,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog,private classToggler: ClassToggleService,private location: Location,   private router: Router,private login:LoginService,private headerService :HeaderService ) {
 
     super();
-    console.log("entra")
 
     this.validarCredenciales()
 
@@ -59,7 +58,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
         this.color="red"
       }
       this.user =this.truncateTo8(value) ;
-      console.log('El valor de la variable ha cambiado:', value);
     });
 
   }
@@ -72,7 +70,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
   }
   obtnerRuta (item:any):string{
-    console.log(item)
     let path:string="";
     switch (item.tipo) {
       case "Activo":

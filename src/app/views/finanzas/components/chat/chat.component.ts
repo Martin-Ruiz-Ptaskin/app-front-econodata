@@ -8,6 +8,7 @@ import { Component,Input, Output, EventEmitter } from '@angular/core';
 })
 export class ChatComponent {
   @Input() message: Array<any> = [];
+  @Input() IsLoading: boolean = false;
 
   // Creamos un EventEmitter para emitir eventos hacia el padre
   @Output() messageOut = new EventEmitter<string>();

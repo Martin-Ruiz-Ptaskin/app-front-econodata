@@ -23,7 +23,6 @@ export class FoundsListComponent implements OnInit {
     this.FoundListServiceService.getData().subscribe(
       response => {
         this.FoundsList = response.data.map((item:any) => {
-          console.log(item.id)
 
           return {
             Fondo: {nombre:item.name,tipo:"link",accion:"founds/founds-view/"+item.id},

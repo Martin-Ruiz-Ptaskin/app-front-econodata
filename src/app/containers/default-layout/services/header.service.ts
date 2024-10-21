@@ -18,7 +18,6 @@ export class HeaderService {
 
   getBarraBusqueda(search: string): Observable<any> {
     const requesUrl = this.apiUrl + "barraBusqueda.php";
-    console.log(requesUrl);
 
     // Aquí podrías agregar una validación para incluir el parámetro de búsqueda si es necesario
     const params = search ? { params: { search } } : {};
@@ -27,7 +26,6 @@ export class HeaderService {
       map(response => {
         // Verificar si el estado de la respuesta es 200
         if (response.status == '500') {
-            console.log("atrapar cuando no hay")
         }
         else if(response.status == '200'){
           return response;
