@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.myproductionurl.com'
+  apiUrl: 'https://econodata.com.ar/php/'
 };
