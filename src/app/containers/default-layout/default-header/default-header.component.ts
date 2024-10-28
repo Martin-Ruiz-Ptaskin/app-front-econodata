@@ -1,4 +1,4 @@
-import { Component, Input,OnInit } from '@angular/core';
+import { Component, Input,OnInit,HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
@@ -27,6 +27,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   icons = { cilArrowLeft };
   user:string=""
   inputFocused:boolean=false
+  verMenu:boolean=true
   color:string="red"
    truncateTo8 = (value: string): string => value.length > 8 ? value.slice(0, 8) : value;
 
@@ -38,6 +39,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
 
   }
+  @HostListener('window:resize', ['$event'])
 
   ngOnInit(): void {
     // Verificar si la ruta actual es '/'
@@ -49,7 +51,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
     setTimeout(() => {
       this.login.openDialogLogin(false)
-    }, 7000);
+    }, 4000);
 
     this.login.userName$. subscribe(value => {
       if(value){      this.color="green"
@@ -120,11 +122,16 @@ return path
 
   onFocus() {
     this.inputFocused = true;
+    if(window.innerWidth<500){
+      this.verMenu=false
+    }
   }
 
   onBlur() {
+
     setTimeout(() => {
       this.inputFocused = false;
+      this.verMenu=true
     }, 100);  // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
   }
   validarCredenciales(){
