@@ -20,7 +20,7 @@ export class SankeyComponent implements AfterViewInit ,OnInit {
       nodeWidth: 10,
       fontFamily: 'Quicksand, sans-serif',
       fontWeight: 100,
-      height: 400,
+      height: 600,
       spacing: 1, // Espacio entre nodos
       nodeBorderWidth: 1, // Grosor del borde de los nodos
       nodeBorderColor: '#000000', // Color del borde de los nodos
@@ -58,7 +58,7 @@ export class SankeyComponent implements AfterViewInit ,OnInit {
         nodeWidth: 10,
         fontFamily: 'Quicksand, sans-serif',
         fontWeight: 100,
-        height: 400,
+        height: 600,
         spacing: 1, // Espacio entre nodos
         nodeBorderWidth: 1, // Grosor del borde de los nodos
         nodeBorderColor: '#000000', // Color del borde de los nodos

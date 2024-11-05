@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { ActivatedRoute } from '@angular/router';
+
 interface IUser {
   name: string;
   state: string;
@@ -21,7 +23,9 @@ interface IUser {
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private chartsData: DashboardChartsData,private router: Router) {
+  paramsURL: string | null = null;
+
+  constructor(private chartsData: DashboardChartsData,private router: Router,private route: ActivatedRoute) {
   }
 
 
@@ -32,6 +36,15 @@ export class DashboardComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      this.paramsURL = params.get('rute'); // Aquí obtienes el valor de 'hola'
+     // Muestra el valor de 'hola' en la consola
+     console.log(this.paramsURL)
+      if(this.paramsURL=="Finanzas"){
+        this.router.navigateByUrl("/finanzas/cargaDeDatos")
+      }
+    });
+
     this.initCharts();
   }
 
