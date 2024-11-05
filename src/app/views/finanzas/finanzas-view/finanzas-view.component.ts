@@ -44,7 +44,7 @@ export class FinanzasViewComponent implements OnInit {
 ngOnInit(): void {
 
 
-  this.cargarValoresIniciales();
+  //this.cargarValoresIniciales();
   this.FinanzasService.ConsultaEnCurso$.subscribe((resp:boolean)=>{
     this.isLoading=resp;
   })
