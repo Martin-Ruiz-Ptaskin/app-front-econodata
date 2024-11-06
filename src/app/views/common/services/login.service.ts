@@ -76,7 +76,8 @@ export class LoginService {
 getCredentialsFromLocalStorage():boolean{
   const email = localStorage.getItem('email') ?? '';  // Si es null, se asigna una cadena vacía
   const id = localStorage.getItem('id') ?? '';
-  if(email!="undefined" && id!="undefined"){
+  if(email && id){
+    console.log("entra por los undefined")
     this.role = "user";
     this.idUser=id
     this.myVariableSubject.next(email);
@@ -123,7 +124,9 @@ getCredentialsFromLocalStorage():boolean{
 
 //@Params
   openDialogLogin(delay:boolean) {
-    console.log((!this.isLogedIn && !this.loginModalOpen))
+    console.log((this.loginModalOpen))
+    console.log((this.isLogedIn ))
+
     if(!this.isLogedIn && !this.loginModalOpen){
       this.loginModalOpen=true
 
