@@ -331,7 +331,7 @@ img {
   display: flex;
   width: 100%;
   height: auto;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width:1000px) {
