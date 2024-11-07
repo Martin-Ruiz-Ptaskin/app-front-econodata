@@ -16,7 +16,7 @@
     </button>
 
     </c-header-nav>
-    <c-header-nav   [ngStyle]="{ width: !verMenu ? '100%' : '60%' }"    style="width: 60%;display: flex; justify-content: center; align-items: center;" class=" d-lg-flex me-auto">
+    <c-header-nav   [ngStyle]="{ width: !verMenu ? '100%' : '60%' }"    style="display: flex; justify-content: center; align-items: center;" class=" d-lg-flex me-auto">
       <div class="container-input"  [ngStyle]="{ width: !verMenu ? '100%' : '85%' }">
         <input class="searchInput" type="text" placeholder="Search" name="text" class="input" id="mainInput" [(ngModel)]="searchTerm"
         (ngModelChange)="onInputChange($event)" (focus)="onFocus()"(blur)="onBlur()">

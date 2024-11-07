@@ -205,11 +205,12 @@ getCredentialsFromLocalStorage():boolean{
 
 
 GoogleLoginConfig(){
+  console.log(window.location.origin +this.router.url)
   const config: AuthConfig = {
     issuer: 'https://accounts.google.com',
     strictDiscoveryDocumentValidation: false,
     clientId: '850910230302-sgorn3o2cgl03pks7vaj8bvt6tq6dejg.apps.googleusercontent.com',
-    redirectUri: window.location.origin +this.router.url,
+    redirectUri: environment.googleRedirect,
     scope: 'openid profile email',
   }
   this.oauthService.configure(config);
@@ -231,6 +232,8 @@ GoogleLoginConfig(){
   getProfile() {
     console.log(this.oauthService.getIdentityClaims())
     console.log(this.idUser)
+    console.log(window.location.origin +this.router.url +" vista Ruta")
+
     return this.oauthService.getIdentityClaims();
   }
 
