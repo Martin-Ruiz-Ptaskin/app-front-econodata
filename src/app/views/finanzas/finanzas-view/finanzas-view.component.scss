@@ -33,18 +33,25 @@ flex-direction: column;
 @media (max-width: 768px) {
 
   .matForm{
-    width: 114px !important;
+    width: 114px ;
   }
 
 }
 
 @media (max-width: 428px) {
+  .matformID{
+    width: 75px !important;
 
-  .matForm{
-    width: 100px !important;
   }
+  .matForm{
+    width: 95px ;
+  }
+
   .next{
     margin-top: 30px;
   }
-
+.padd{
+  padding: 0 !important;
+  width: 140px;
+}
 }

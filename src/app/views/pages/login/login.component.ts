@@ -13,6 +13,8 @@ export class LoginComponent {
   registerForm: FormGroup;
   errorLogIn:string=""
   errorRegistro:string="";
+  isInAppBrowser: boolean = false;
+
 
   constructor(private fb: FormBuilder, private loginService: LoginService ) {
     // Inicializa los formularios
@@ -25,6 +27,10 @@ export class LoginComponent {
       email: ['', [Validators.required,Validators.email]],
       password: ['', [Validators.required]]
     });
+
+    const userAgent: any = navigator.userAgent || navigator.vendor || (window as any)['opera'];
+    this.isInAppBrowser = /TikTok|Instagram|FBAV|FBAN|Twitter/i.test(userAgent);
+    console.log(this.isInAppBrowser)
   }
    toggleForms() {
   this.isLoginVisible=!this.isLoginVisible

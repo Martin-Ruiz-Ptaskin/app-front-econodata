@@ -29,6 +29,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   inputFocused:boolean=false
   verMenu:boolean=true
   color:string="red"
+  logintime:number=1
    truncateTo8 = (value: string): string => value.length > 8 ? value.slice(0, 8) : value;
 
   constructor(public dialog: MatDialog,private classToggler: ClassToggleService,private location: Location,   private router: Router,private login:LoginService,private headerService :HeaderService ) {
@@ -51,7 +52,8 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
     setTimeout(() => {
       this.login.openDialogLogin(false)
-    }, 4000);
+      this.logintime+1
+    }, 4000 *this.logintime);
 
     this.login.userName$. subscribe(value => {
       if(value){      this.color="green"

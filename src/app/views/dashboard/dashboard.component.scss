@@ -333,7 +333,9 @@ img {
   height: auto;
   flex-wrap: wrap;
 }
-
+.cardFlex{
+  display: flex;
+}
 @media screen and (max-width:1000px) {
   .displayStock {
     min-width: 25%;

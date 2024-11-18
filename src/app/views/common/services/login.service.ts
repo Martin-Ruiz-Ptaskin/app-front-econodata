@@ -124,8 +124,8 @@ getCredentialsFromLocalStorage():boolean{
 
 //@Params
   openDialogLogin(delay:boolean) {
-    console.log((this.loginModalOpen))
-    console.log((this.isLogedIn ))
+    //console.log((this.loginModalOpen))
+    //console.log((this.isLogedIn ))
 
     if(!this.isLogedIn && !this.loginModalOpen){
       this.loginModalOpen=true
