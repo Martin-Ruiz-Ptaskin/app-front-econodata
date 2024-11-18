@@ -205,7 +205,7 @@ getCredentialsFromLocalStorage():boolean{
 
 
 GoogleLoginConfig(){
-  console.log(window.location.origin +this.router.url)
+  //console.log(window.location.origin +this.router.url)
   const config: AuthConfig = {
     issuer: 'https://accounts.google.com',
     strictDiscoveryDocumentValidation: false,
@@ -238,7 +238,6 @@ GoogleLoginConfig(){
   }
 
   validarLoginGoogle(){
-    console.log(this.getCredentialsFromLocalStorage())
     if(!this.getCredentialsFromLocalStorage()){
         const datosGoogle=this.oauthService.getIdentityClaims()
 

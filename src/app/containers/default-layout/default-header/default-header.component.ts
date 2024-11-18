@@ -1,4 +1,4 @@
-import { Component, Input,OnInit,HostListener } from '@angular/core';
+import { Component, Input,OnInit,HostListener,ChangeDetectionStrategy,OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
@@ -11,11 +11,13 @@ import { HeaderService } from '../services/header.service';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  styleUrls: ['./default-header.component.scss']
+  styleUrls: ['./default-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
 
 })
 
-export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
+export class DefaultHeaderComponent extends HeaderComponent implements OnInit,OnDestroy {
 
   @Input() sidebarId: string = "sidebar";
   public newMessages = new Array(4)
@@ -40,10 +42,11 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
 
   }
-  @HostListener('window:resize', ['$event'])
+  //@HostListener('window:resize', ['$event'])
 
   ngOnInit(): void {
     // Verificar si la ruta actual es '/'
+    console.log('Header Component Initialized');
 
     setTimeout(() => {
       this.login.validarLoginGoogle()
@@ -65,6 +68,10 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     });
 
   }
+
+  ngOnDestroy(): void {
+    console.log('Header Destroyed');
+  }
   openDialog(){
 
 
@@ -73,6 +80,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
 
   }
+
   obtnerRuta (item:any):string{
     let path:string="";
     switch (item.tipo) {
