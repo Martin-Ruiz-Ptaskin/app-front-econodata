@@ -55,3 +55,11 @@ flex-direction: column;
   width: 140px;
 }
 }
+
+@media (max-width: 340px) {
+  .steperResponsive{
+    width:  99vw;
+    margin-left: -34px;
+  }
+}
+

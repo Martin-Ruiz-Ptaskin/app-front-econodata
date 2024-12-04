@@ -7,7 +7,7 @@
 
     Completa el formulario con tu información para recibir posibles puntos a mejorar sobre tus finanzas
     <br>
-<mat-stepper style="margin-top:10px" orientation="vertical" [linear]="isLinear" #stepper>
+<mat-stepper class="steperResponsive" style="margin-top:10px" orientation="vertical" [linear]="isLinear" #stepper>
   <!-- Step 1: Ingresos -->
   <mat-step [stepControl]="ingresos">
     <form [formGroup]="ingresos">
