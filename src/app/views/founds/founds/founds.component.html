@@ -34,7 +34,7 @@
       [title]="'Acciones compradas'"
       class="mb-3"
       color="info"
-      value="{{valortotal.toLocaleString('en-US')}}"
+      value="{{accionesCompradas.toLocaleString('en-US')}}"
     >
       <ng-template cTemplateId="widgetIconTemplate">
         <svg [cIcon]="icons.cilClipboard" size="xl" width="24"></svg>
@@ -42,10 +42,49 @@
     </c-widget-stat-f>
   </c-col>
 </c-row>
-<app-simple-table   [inputdataSource]="assets"   [displayedColumns]="displayedColumns"></app-simple-table>
+<c-row><c-col *ngIf="compras" xs="12" lg="6">
+  <c-card class="mb-4">
+    <c-card-header>
+      Ultimas Compras
+    </c-card-header>
+    <c-card-body>
+      <app-simple-table   [inputdataSource]="compras"   [displayedColumns]="displayedColumnsCompra"></app-simple-table>
+
+    </c-card-body>
+  </c-card>
+</c-col>
+<c-col *ngIf="ventas" xs="12" lg="6">
+  <c-card class="mb-4">
+    <c-card-header>
+      Ultimas ventas
+    </c-card-header>
+    <c-card-body>
+      <app-simple-table   [inputdataSource]="ventas"   [displayedColumns]="displayedColumnsVentas"></app-simple-table>
+
+    </c-card-body>
+  </c-card>
+</c-col></c-row>
+
+<c-row>
+  <c-col *ngIf="ventas" xs="12" lg="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        Todas las tenencias
+      </c-card-header>
+      <c-card-body>
+        <app-simple-table   [inputdataSource]="assets"   [displayedColumns]="displayedColumns"></app-simple-table>
+
+      </c-card-body>
+    </c-card>
+  </c-col>
 
 
-<c-col xs="12" lg="6">
+</c-row>
+
+
+
+
+<c-col *ngIf="chartDoughnutData" xs="12" lg="6">
   <c-card class="mb-4">
     <c-card-header>
       Doughnut Chart

@@ -16,20 +16,28 @@ import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
 export class FoundsComponent implements OnInit {
   foundName:string="";
   foundAssets:any;
-  tenencias:any
+  tenencias:any;
+  accionesCompradas:number=0;
   icons = { cilCash, cilUser,cilClipboard };
   cantidadPosiciones:number =0;
   valortotal:any
   assets:any
   chartDoughnutData:any
+  ventas=[]
+  nextPageBtnVentas=true;
+  compras=[]
+  nextPageBtnCompras=true;
   displayedColumns: string[] = ['Ticker', 'Cantidad_acciones', 'Porcentaje', 'Dinero', 'Movimiento'];
+  displayedColumnsVentas: string[] = ['Ticker', 'Movimiento', 'Dinero'];
+  displayedColumnsCompra: string[] = ['Ticker', 'Movimiento', 'Dinero'];;
 
   constructor(private route: ActivatedRoute,private FoundListServiceService: FoundListServiceService  ) { }
 
   ngOnInit(): void {
     if(this.route.snapshot.paramMap.get('name')){
+      let name=this.route.snapshot.paramMap.get('name')
 
-      this.FoundListServiceService.getFoundById( this.foundName).subscribe(
+      this.FoundListServiceService.getFoundById( name).subscribe(
 
         response => {
           this.foundAssets = response.data.map((item:any) => {
@@ -62,6 +70,7 @@ export class FoundsComponent implements OnInit {
 
               };
             });
+            this.ordenarVentasYcompras()
           });
         },
         error => {
@@ -88,7 +97,11 @@ export class FoundsComponent implements OnInit {
     const valorNumerico = parseFloat(obj.value.replace(/[$,]/g, ''));
     return acc + valorNumerico;
   }, 0);
-
+this.accionesCompradas=this.assets.reduce((acc: number, obj: { cantidad: string }) => {
+  // Eliminar el símbolo de dólar y las comas para convertir el valor en número
+  const valorNumerico = parseFloat(obj.cantidad.replace(/[$,]/g, ''));
+  return acc + valorNumerico;
+}, 0);
   // Formatear los resultados como JSON
   return JSON.stringify({
     totalObjetos,
@@ -165,5 +178,12 @@ crearGrafico(data:any){
   return colores;
 }
 
+ordenarVentasYcompras(){
+  this.ventas=this.assets.filter((item:any)=>item.Movimiento.nombre.toLowerCase().includes("venta"))
+  this.compras=this.assets.filter((item:any)=>item.Movimiento.nombre.toLowerCase().includes("compra"))
+  console.log(this.ventas)
+  console.log(this.compras)
+
+}
 
 }
