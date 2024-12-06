@@ -25,7 +25,7 @@ export class FoundsListComponent implements OnInit {
         this.FoundsList = response.data.map((item:any) => {
 
           return {
-            Fondo: {nombre:item.name,tipo:"link",accion:"founds/founds-view/"+item.id},
+            Fondo: {nombre:item.name,tipo:"link",accion:"founds/founds-view/"+item.name},
             Ultima_modificación:  {nombre:item.date,tipo:"texto"},
 
           };

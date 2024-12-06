@@ -54,8 +54,9 @@ getNextPage(page:number){
 }
 
 
-getFoundById(name:any){
-  let url = this.apiUrl + "getFoundById.php"+"?name="+name;
+getFoundByName(name:any){
+  console.log(encodeURIComponent(name))
+  let url = this.apiUrl + "getFoundByName.php"+"?name="+encodeURIComponent(name);
     return this.http.get<any>(url).pipe(
       map(response => {
         // Aquí validamos si el código de estado no es 200

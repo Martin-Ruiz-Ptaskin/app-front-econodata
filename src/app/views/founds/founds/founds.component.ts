@@ -36,8 +36,8 @@ export class FoundsComponent implements OnInit {
   ngOnInit(): void {
     if(this.route.snapshot.paramMap.get('name')){
       let name=this.route.snapshot.paramMap.get('name')
-
-      this.FoundListServiceService.getFoundById( name).subscribe(
+      console.log(name)
+      this.FoundListServiceService.getFoundByName( name).subscribe(
 
         response => {
           this.foundAssets = response.data.map((item:any) => {
@@ -61,7 +61,7 @@ export class FoundsComponent implements OnInit {
               }
 
               return {
-                Ticker:  {nombre:item.name,tipo:"texto"},
+                Ticker:  {nombre:item.name,tipo:"link", accion:"/insider/ticket/"+item.name},
                 Cantidad_acciones:  {nombre:item.cantidad,tipo:"texto"},
                 Porcentaje:  {nombre:item.portfolioPart +"%",tipo:"texto"},
                 Dinero:  {nombre:item.value,tipo:"texto"},
@@ -185,5 +185,11 @@ ordenarVentasYcompras(){
   console.log(this.compras)
 
 }
+togleCambiarPagina(action:string){
 
+  if(action=="ventas"){
+    this.nextPageBtnVentas=!this.nextPageBtnVentas
+  }
+
+}
 }
