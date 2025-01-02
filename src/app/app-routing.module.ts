@@ -43,6 +43,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/insider/insider.module').then((m) => m.InsiderModule)
       }
+
+      ,
+
+      {
+        path: 'perfil',
+        loadChildren: () =>
+          import('./views/perfil-usuario/perfil-usuario.module').then((m) => m.PerfilUsuarioModule)
+      }
       ,
       {
         path: 'finanzas',

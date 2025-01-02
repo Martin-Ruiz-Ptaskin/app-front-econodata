@@ -1,0 +1,88 @@
+<div class="title " ><h2> Tus finazas</h2>
+
+</div>
+<c-row [ngClass]="{'skeleton': !finances}"></c-row>
+<c-row *ngIf="finances" >
+
+  <c-col  lg="3" xs="12">
+    <c-widget-stat-f
+      [title]="'Ingresos mensuales'"
+      class="mb-3"
+      color="primary"
+      value="{{finances.ingresosSum.toLocaleString('en-US')??0}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilUser" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+  <c-col lg="3" xs="12">
+    <c-widget-stat-f
+      [title]="'Gastos mensuales'"
+      class="mb-3"
+      color="success"
+      value="{{finances.gastosSum.toLocaleString('en-US')??0}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilCash" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+  <c-col lg="3" xs="12">
+    <c-widget-stat-f
+      [title]="'Ahorro total'"
+      class="mb-3"
+      color="info"
+      value="{{finances.ahorrosSum.toLocaleString('en-US')??0}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilClipboard" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+  <c-col lg="3" xs="12">
+    <c-widget-stat-f
+      [title]="'Deueda total'"
+      class="mb-3"
+      color="info"
+      value="{{finances.deudasSum.toLocaleString('en-US')??0}}"
+    >
+      <ng-template cTemplateId="widgetIconTemplate">
+        <svg [cIcon]="icons.cilClipboard" size="xl" width="24"></svg>
+      </ng-template>
+    </c-widget-stat-f>
+  </c-col>
+</c-row>
+
+<div id="content"  class="userinfo" *ngIf="finances">
+
+
+
+  <app-chat  id="view" *ngIf="requestEnviado>=1" [IsLoading]="isLoading" [message]="message" (messageOut)="CharlaChatGptEvento($event)"> </app-chat>
+
+<c-row>
+
+<c-col  xs="12" lg="6"  >
+<c-card class="mb-4">
+<c-card-header>
+  Flujo  de tus ingresos
+
+</c-card-header>
+<c-card-body>
+  <app-sankey  [finances]="finances.finances"></app-sankey>
+</c-card-body>
+</c-card>
+</c-col>
+<c-col xs="12" lg="6">
+<c-card class="mb-4">
+<c-card-header>
+  Distribución de tus gastos
+</c-card-header>
+<c-card-body>
+  <c-chart type="doughnut" [data]="chartDoughnutData"></c-chart>
+</c-card-body>
+</c-card>
+</c-col>
+</c-row>
+
+</div>

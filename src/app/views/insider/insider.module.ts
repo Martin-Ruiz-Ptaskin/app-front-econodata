@@ -19,12 +19,6 @@ import {PruebaComponent} from '../common/prueba/prueba.component'
     InsiderRoutingModule,
     PruebaComponent,
     PagesModule,
-
-
-
-
-
-
   ]
 })
 export class InsiderModule { }

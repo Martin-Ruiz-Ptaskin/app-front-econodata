@@ -31,6 +31,8 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
     MatButtonModule,
     ReactiveFormsModule,
     MatIcon
-  ]
+  ],
+  exports: [FinanzasViewComponent, ChatComponent, SankeyComponent], // Aquí exportamos los componentes
+
 })
 export class FinanzasModule { }
