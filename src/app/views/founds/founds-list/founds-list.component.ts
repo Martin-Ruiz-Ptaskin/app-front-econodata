@@ -1,14 +1,13 @@
 import { Component ,OnInit} from '@angular/core';
 import { SimpleTableComponent } from '../../pages/simple-table/simple-table.component';
 import { TableModule } from '@coreui/angular';
-import { PruebaComponent } from '../../common/prueba/prueba.component'; // Replace with the actual path to your component
 import { PagesModule } from '../../pages/pages.module';
 import {FoundListServiceService} from '../service/found-list-service.service'
 
 @Component({
   selector: 'app-founds-list',
   standalone: true,
-  imports: [PruebaComponent,PagesModule],
+  imports: [PagesModule],
   templateUrl: './founds-list.component.html',
   styleUrl: './founds-list.component.scss'
 })

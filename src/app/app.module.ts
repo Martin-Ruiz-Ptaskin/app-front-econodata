@@ -20,7 +20,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Import containers
 import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
-import { PruebaComponent } from './views/common/prueba/prueba.component';
 import {
   AvatarModule,
   BadgeModule,
@@ -97,7 +96,7 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     PagesModule,
-    PruebaComponent
+
   ],
   providers: [
 

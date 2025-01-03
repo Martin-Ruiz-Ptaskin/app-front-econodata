@@ -1,8 +1,25 @@
 <div class="title " ><h2> Tus finazas</h2>
 
 </div>
-<c-row [ngClass]="{'skeleton': !finances}"></c-row>
-<c-row *ngIf="finances" >
+<div  *ngIf="!finances">
+  <c-col  xs="12" lg="6"  >
+    <c-card   [ngClass]="{'skeleton': !response}" class="mb-4">
+    <c-card-header>
+
+    </c-card-header>
+    <c-card-body *ngIf="!response"  style="text-align: center; height: 60px;">
+
+    </c-card-body>
+    <c-card-body *ngIf="response"  style="text-align: center;">
+      <p> Todavia no cargaste tus datos, puedes cargarlos </p>
+      <button type="button" [routerLink]="['/finanzas/cargaDeDatos']" class="btn btn-primary">aquí</button>
+
+    </c-card-body>
+    </c-card>
+    </c-col>
+</div>
+<div *ngIf="finances">
+<c-row  >
 
   <c-col  lg="3" xs="12">
     <c-widget-stat-f
@@ -54,7 +71,7 @@
   </c-col>
 </c-row>
 
-<div id="content"  class="userinfo" *ngIf="finances">
+<div id="content"  class="userinfo" >
 
 
 
@@ -85,4 +102,5 @@
 </c-col>
 </c-row>
 
+</div>
 </div>

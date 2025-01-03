@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
 import { PerfilService } from '../service/perfil.service';
+import { FunctionsService } from '../../common/services/functions.service';
 type FinanceData = {
   id: number;
   idUsuario: number;
@@ -23,6 +24,7 @@ type ParsedFinanceData = {
 export class PerfilComponent implements OnInit {
   icons = { cilCash, cilUser,cilClipboard };
   chartDoughnutData:any
+  response:boolean=false
   message:Array<any>=[]
   finances:any=null
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
@@ -31,11 +33,13 @@ export class PerfilComponent implements OnInit {
 
 
 
-  constructor( private PerfilService:PerfilService) { }
+  constructor( private PerfilService:PerfilService,private FunctionsService:FunctionsService) { }
    ngOnInit(): void {
        this.PerfilService.getPerfilData().subscribe((resp:any)=>{
+          this.response=true
           this.finances = this.processFinanceData(resp.data);
-          console.log(this.finances)
+          console.log(this.response)
+          this.chartDoughnutData=this.FunctionsService.crearGraficoTorta(this.finances.finances.gastos)
        })
    }
     CharlaChatGptEvento(mensaje: string) {

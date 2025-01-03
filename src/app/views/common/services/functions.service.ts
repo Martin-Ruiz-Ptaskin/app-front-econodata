@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
-
+import {pastelColors} from './colors'
 @Injectable({
   providedIn: 'root'
 })
 export class FunctionsService {
 
   constructor() { }
-  generarColoresPastel(cantidad: number): string[] {
+   generarColoresPastel(cantidad: number): string[] {
+    if (cantidad > 360) {
+      throw new Error("La cantidad de colores solicitada supera el límite de colores únicos posibles.");
+    }
+
     const colores: string[] = [];
-    const paso = 360 / cantidad;  // Divide el círculo de color en partes iguales para asegurar diversidad
+    const paso = 360 / cantidad; // Divide el círculo de color en partes iguales
 
     for (let i = 0; i < cantidad; i++) {
-      // El valor del tono se incrementa en un paso fijo para asegurar una amplia diferencia entre colores
-      const hue = i * paso;
-
-      // Convertimos HSL a formato RGB en hexadecimal, asegurando tonos pastel con alta luminosidad y saturación media
-      const color = this.hslToHex(hue, 70, 60);  // Saturación 70% y luminosidad 60% para mantener tonos claros pero distintos
+      const hue = i * paso; // Asegura una distribución uniforme del matiz
+      const color = this.hslToHex(hue, 70, 80); // Saturación 70% y luminosidad 80% para tonos pastel
+      console.log(color)
       colores.push(color);
     }
 
     return colores;
   }
 
-  // Función auxiliar para convertir HSL a formato hexadecimal
+  // Función auxiliar para convertir HSL a HEX
    hslToHex(h: number, s: number, l: number): string {
     s /= 100;
     l /= 100;
@@ -43,16 +45,48 @@ export class FunctionsService {
       r = 0; g = x; b = c;
     } else if (h >= 240 && h < 300) {
       r = x; g = 0; b = c;
-    } else {
+    } else if (h >= 300 && h < 360) {
       r = c; g = 0; b = x;
     }
 
-    // Convertimos los valores RGB a formato hexadecimal
-    const rHex = Math.floor((r + m) * 255).toString(16).padStart(2, '0');
-    const gHex = Math.floor((g + m) * 255).toString(16).padStart(2, '0');
-    const bHex = Math.floor((b + m) * 255).toString(16).padStart(2, '0');
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
 
-    return `#${rHex}${gHex}${bHex}`;
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
   }
 
+
+  crearGraficoTorta(data:any){
+    console.log(data)
+    let totalValue = 0;
+    const colores=this.generarColoresPastel((data.length))
+    const chartDoughnutData = {
+      labels: [] as string[],
+      datasets: [
+        {
+          backgroundColor:colores, // Colores personalizados
+          data: [] as number[],
+        }
+      ]
+    };
+    data.forEach((item: any) => {
+      totalValue += item.monto;
+    });
+    const activosConPorcentaje = data.map((item: any) => {
+
+      const percentage = (item.monto / totalValue) * 100;
+      return {
+        name: item.categoria,
+        percentage: percentage
+      };
+    });
+    activosConPorcentaje.forEach((item: any) => {
+      chartDoughnutData.labels.push(item.name);
+      chartDoughnutData.datasets[0].data.push(parseFloat(item.percentage.toFixed(2))); // Redondear a 2 decimales
+    });
+
+  return chartDoughnutData
+
+  }
 }

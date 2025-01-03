@@ -22,7 +22,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { WidgetsModule } from '../widgets/widgets.module';
-import { PruebaComponent } from '../common/prueba/prueba.component';
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -43,7 +42,7 @@ import { PruebaComponent } from '../common/prueba/prueba.component';
     TableModule,
     WidgetsModule,
     PagesModule,
-    PruebaComponent
+
 
   ],
   declarations: [DashboardComponent]

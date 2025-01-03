@@ -16,14 +16,16 @@ export class PerfilService {
 
   getPerfilData(): Observable<any> {
     let idUsuario = this.LoginService.getId(); // Obtenemos el ID del usuario
+    console.log(idUsuario);
+    if(idUsuario != null){
     let url = this.apiUrl + "getProfileData.php?idUsuario="+idUsuario;
     return this.http.get<any>(url).pipe(
       map(response => {
         // Aquí validamos si el código de estado no es 200
-        if (response.status !== 200) {
+        if (response.status > 200   ) {
           // Si no es 200, llamamos al servicio de error y arrojamos un error
           this.error.error();
-          throw new HttpErrorResponse({ status: response.status, statusText: response.statusText });
+          //throw new HttpErrorResponse({ status: response.status, statusText: response.statusText });
         }
         // Si es 200, devolvemos la respuesta
         return response;
@@ -31,9 +33,12 @@ export class PerfilService {
       catchError(error => {
         // Aquí manejamos otros posibles errores que puedan ocurrir
         this.error.error();
-        return throwError(() => error);
+        return error;
       })
     );
   }
-
+  else{
+    return throwError("No se ha podido obtener el ID del usuario.");
+  }
+}
 }

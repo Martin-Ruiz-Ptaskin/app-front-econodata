@@ -1,14 +1,13 @@
 import { Component ,OnInit} from '@angular/core';
 import { SimpleTableComponent } from '../../pages/simple-table/simple-table.component';
 import { TableModule } from '@coreui/angular';
-import { PruebaComponent } from '../../common/prueba/prueba.component'; // Replace with the actual path to your component
 import { PagesModule } from '../../pages/pages.module';
 import {InsiderListServiceService} from '../service/insider-list-service.service'
 
 @Component({
   selector: 'app-insider-list',
   standalone: true,
-  imports: [PruebaComponent,PagesModule],
+  imports: [PagesModule],
   templateUrl: './insider-list.component.html',
   styleUrl: './insider-list.component.scss'
 })

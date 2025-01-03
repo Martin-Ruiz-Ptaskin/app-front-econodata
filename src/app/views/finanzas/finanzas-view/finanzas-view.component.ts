@@ -126,7 +126,7 @@ finalizar(){
   if(this.loginService.isLogedIn){
     let datos =this.recogerDatos()
     this.finances=this.recogerDatos()
-    this.chartDoughnutData=this.crearGraficoTorta(datos.gastos)
+    this.chartDoughnutData=this.FunctionsService.crearGraficoTorta(datos.gastos)
     console.log(this.chartDoughnutData)
     this.requestEnviado=1
     this.scrollToBottom();
@@ -150,37 +150,6 @@ finalizar(){
 }
 
 
-crearGraficoTorta(data:any){
-  let totalValue = 0;
-  const colores=this.FunctionsService.generarColoresPastel((data.length/2))
-  const chartDoughnutData = {
-    labels: [] as string[],
-    datasets: [
-      {
-        backgroundColor:colores, // Colores personalizados
-        data: [] as number[],
-      }
-    ]
-  };
-  data.forEach((item: any) => {
-    totalValue += item.monto;
-  });
-  const activosConPorcentaje = data.map((item: any) => {
-
-    const percentage = (item.monto / totalValue) * 100;
-    return {
-      name: item.categoria,
-      percentage: percentage
-    };
-  });
-  activosConPorcentaje.forEach((item: any) => {
-    chartDoughnutData.labels.push(item.name);
-    chartDoughnutData.datasets[0].data.push(parseFloat(item.percentage.toFixed(2))); // Redondear a 2 decimales
-  });
-
-return chartDoughnutData
-
-}
 
 CharlaChatGptEvento(mensaje: string) {
   console.log(mensaje)

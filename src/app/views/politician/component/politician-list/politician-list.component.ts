@@ -1,7 +1,6 @@
 import { Component ,OnInit} from '@angular/core';
 import { SimpleTableComponent } from '../../../pages/simple-table/simple-table.component';
 import { TableModule } from '@coreui/angular';
-import { PruebaComponent } from '../../../common/prueba/prueba.component'; // Replace with the actual path to your component
 import { PagesModule } from '../../../pages/pages.module';
 import {PoliticianListService} from '../../service/politician-list.service'
 @Component({
