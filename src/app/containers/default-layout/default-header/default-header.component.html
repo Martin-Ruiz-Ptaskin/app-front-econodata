@@ -27,6 +27,7 @@
 
         <div *ngIf="listaBarra.length>0 && inputFocused" class="mostrarBusquedas">
           <div *ngFor="let item of listaBarra" class="item">
+
             <div class="icono itemObjet" >
               <mat-icon  *ngIf="item.tipo=='Insider'" >account_circle</mat-icon>
               <mat-icon *ngIf="item.tipo=='Político'" >account_circle</mat-icon>
@@ -37,7 +38,7 @@
             <div  [routerLink]="obtnerRuta(item)"  class="name itemObjet">
               {{item.dato}}
             </div>
-            <p style="font-size: 40px;">|</p>
+            <div style="height: 100%; width: 1px; background-color: black;"></div>
             <div class="tipo itemObjet">
                      {{item.tipo}}
             </div>

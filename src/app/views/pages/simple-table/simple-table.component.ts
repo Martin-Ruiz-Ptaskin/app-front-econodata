@@ -47,8 +47,7 @@ export class SimpleTableComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // Maneja las actualizaciones de las propiedades @Input
     if (changes['inputdataSource']) {
-      console.log(this.displayedColumns)
-      console.log(this.inputdataSource)
+
       this.dataSource = this.inputdataSource ;
     }
 
@@ -56,7 +55,6 @@ export class SimpleTableComponent implements OnChanges {
   }
 
   redirect(ruta:string){
-    console.log(ruta)
     this.router.navigate([ruta], { skipLocationChange: true }); // Redirigir después del login
 
   }

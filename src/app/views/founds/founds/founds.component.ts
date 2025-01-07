@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute,Router, NavigationEnd  } from '@angular/router';
 
-import { ActivatedRoute } from '@angular/router';
 
 import {FoundListServiceService} from '../service/found-list-service.service'
 import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
@@ -31,55 +31,16 @@ export class FoundsComponent implements OnInit {
   displayedColumnsVentas: string[] = ['Ticker', 'Movimiento', 'Dinero'];
   displayedColumnsCompra: string[] = ['Ticker', 'Movimiento', 'Dinero'];;
 
-  constructor(private route: ActivatedRoute,private FoundListServiceService: FoundListServiceService  ) { }
+  constructor(private route: ActivatedRoute,private FoundListServiceService: FoundListServiceService ,private router: Router ) { }
 
   ngOnInit(): void {
-    if(this.route.snapshot.paramMap.get('name')){
-      let name=this.route.snapshot.paramMap.get('name')
-      console.log(name)
-      this.FoundListServiceService.getFoundByName( name).subscribe(
+    this.getFoundAssets()
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.getFoundAssets()
 
-        response => {
-          this.foundAssets = response.data.map((item:any) => {
-            this.foundName=item.name
-
-            this.tenencias=this.calcularResumenFromString(item.assets)
-
-            this.chartDoughnutData=  this.crearGrafico(this.assets)
-            this.cantidadPosiciones=this.assets.length
-            this.assets=  this.assets.map((item:any) => {
-              let movimiento = "";
-
-              if (item.movimiento) {
-                if (item.movimiento.toLowerCase().includes("add")) {
-                  movimiento = `Compra ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
-                } else if (item.movimiento.toLowerCase().includes("reduce")) {
-                  movimiento = `Venta ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
-                }
-              } else {
-                movimiento = "Nueva compra";
-              }
-
-              return {
-                Ticker:  {nombre:item.name,tipo:"link", accion:"/insider/ticket/"+item.name},
-                Cantidad_acciones:  {nombre:item.cantidad,tipo:"texto"},
-                Porcentaje:  {nombre:item.portfolioPart +"%",tipo:"texto"},
-                Dinero:  {nombre:item.value,tipo:"texto"},
-                Movimiento:  {nombre:movimiento,tipo:"texto"},
-
-
-              };
-            });
-            this.ordenarVentasYcompras()
-          });
-        },
-        error => {
-          console.error('Error fetching data:', error);
-        }
-      );
-
-
-    }
+      }
+    });
 }
 
 
@@ -191,5 +152,62 @@ togleCambiarPagina(action:string){
     this.nextPageBtnVentas=!this.nextPageBtnVentas
   }
 
+}
+resetearvalores(){
+
+  this.accionesCompradas=0
+  this.cantidadPosiciones=0
+  this.valortotal=""
+
+}
+
+getFoundAssets(){
+  this.resetearvalores()
+  if(this.route.snapshot.paramMap.get('name')){
+    let name=this.route.snapshot.paramMap.get('name')
+    console.log(name)
+    this.FoundListServiceService.getFoundByName( name).subscribe(
+
+      response => {
+        this.foundAssets = response.data.map((item:any) => {
+          this.foundName=item.name
+
+          this.tenencias=this.calcularResumenFromString(item.assets)
+
+          this.chartDoughnutData=  this.crearGrafico(this.assets)
+          this.cantidadPosiciones=this.assets.length
+          this.assets=  this.assets.map((item:any) => {
+            let movimiento = "";
+
+            if (item.movimiento) {
+              if (item.movimiento.toLowerCase().includes("add")) {
+                movimiento = `Compra ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
+              } else if (item.movimiento.toLowerCase().includes("reduce")) {
+                movimiento = `Venta ${item.movimiento.match(/\d+(\.\d+)?%/g) || ''}`; // Extrae el porcentaje si existe
+              }
+            } else {
+              movimiento = "Nueva compra";
+            }
+
+            return {
+              Ticker:  {nombre:item.name,tipo:"link", accion:"/insider/ticket/"+item.name},
+              Cantidad_acciones:  {nombre:item.cantidad,tipo:"texto"},
+              Porcentaje:  {nombre:item.portfolioPart +"%",tipo:"texto"},
+              Dinero:  {nombre:item.value,tipo:"texto"},
+              Movimiento:  {nombre:movimiento,tipo:"texto"},
+
+
+            };
+          });
+          this.ordenarVentasYcompras()
+        });
+      },
+      error => {
+        console.error('Error fetching data:', error);
+      }
+    );
+
+
+  }
 }
 }

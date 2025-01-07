@@ -1,8 +1,10 @@
+
+
 .container-input {
   position: relative;
 }
 .mostrarBusquedascont{
-  width: 100%;
+  width: 90%;
   height: 500px;
   position: absolute;
   justify-content: center;
@@ -24,11 +26,7 @@
 text-align: center;
 
 }
-.itemObjet{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .mostrarBusquedas{
   display: flex;
   flex-direction: column;
@@ -57,7 +55,7 @@ text-align: center;
   width: 40%;
 }
 .input {
-  width: 350px;
+  width: 90%;
   padding: 10px 0px 10px 40px;
   border-radius: 9999px;
   border: solid 1px #333;

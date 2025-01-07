@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router, NavigationEnd  } from '@angular/router';
 import {TickerService} from '../ticker/service/ticker.service'
 import { PagesModule } from '../../pages/pages.module';
 import { IconDirective } from '@coreui/icons-angular';
@@ -26,41 +26,17 @@ export class TickerComponent implements OnInit{
   displayedColumns: string[] = ['operador', 'activo', 'cantidad', 'value', 'movimiento', 'tipo', 'fecha'];
 
 
-  constructor(private route: ActivatedRoute,private service:TickerService) { }
+  constructor(private route: ActivatedRoute,private service:TickerService,private router: Router) { }
 
 
   ngOnInit(): void {
-    if(this.route.snapshot.paramMap.get('ticker')){
-      this.ticker = this.route.snapshot.paramMap.get('ticker')|| ''.toUpperCase();
-      this.ticker.toUpperCase()
+    this.obtenerDatosTkt();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.obtenerDatosTkt();
 
-    }
-
-    this.service.getData(this.ticker).subscribe(
-
-
-      response => {
-        this.updatedData(response.data)
-
-        this.insiders = response.data.map((item:any) => {
-          this.interesados++
-          return {
-            operador: {nombre:item.operador,tipo:"texto"},
-            activo:  {nombre:item.activo,tipo:"texto"},
-            cantidad:  {nombre:item.cantidad,tipo:"texto"},
-            value:  {nombre:item.value,tipo:"texto"},
-            movimiento:  {nombre:item.movimiento,tipo:"texto"},
-            tipo:  {nombre:item.tipo_investor,tipo:"texto"},
-            fecha:  {nombre:item.fecha,tipo:"texto"},
-
-
-          };
-        });;
-      },
-      error => {
-        console.error('Error fetching data:', error);
       }
-    );
+    });
 
   }
  updatedData(data:any){
@@ -89,7 +65,46 @@ export class TickerComponent implements OnInit{
  }
 
 
+ resetearDatos(){
+  this.totalValue=0
+  this.interesados=0
+  this.accionesCompradas=0
+
+ }
 
 
+
+obtenerDatosTkt(){
+  this.resetearDatos()
+  if(this.route.snapshot.paramMap.get('ticker')){
+    this.ticker = this.route.snapshot.paramMap.get('ticker')|| ''.toUpperCase();
+    this.ticker.toUpperCase()
+
+  }
+
+  this.service.getData(this.ticker).subscribe(
+    response => {
+      this.updatedData(response.data)
+
+      this.insiders = response.data.map((item:any) => {
+        this.interesados++
+        return {
+          operador: {nombre:item.operador,tipo:"texto"},
+          activo:  {nombre:item.activo,tipo:"texto"},
+          cantidad:  {nombre:item.cantidad,tipo:"texto"},
+          value:  {nombre:item.value,tipo:"texto"},
+          movimiento:  {nombre:item.movimiento,tipo:"texto"},
+          tipo:  {nombre:item.tipo_investor,tipo:"texto"},
+          fecha:  {nombre:item.fecha,tipo:"texto"},
+
+
+        };
+      });;
+    },
+    error => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
 
 }

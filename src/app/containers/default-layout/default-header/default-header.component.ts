@@ -139,12 +139,12 @@ return path
   }
 
   onBlur() {
-    console.log("no focus")
+    console.log("nofocus")
 
-
+    setTimeout(() => {
       this.inputFocused = false;
       this.verMenu=true
-     // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
+    }, 60);  // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
   }
   validarCredenciales(){
     this.login.getCredentialsFromLocalStorage()

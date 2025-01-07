@@ -49,7 +49,7 @@ FoundsList: any=[];
         this.next_Page=response.next
         this.FoundsList = this.FoundsList.concat(response.data.map((item:any) => {
 
-          return {
+           return {
             Nombre:  {nombre:item.name,    tipo:"texto",  accion:"/"},
             Ticker:  {nombre:item.asset , tipo:"link", accion:"/insider/ticket/"+item.asset},
             partido: {nombre:item.party ,    tipo:"texto", accion:"/"},
