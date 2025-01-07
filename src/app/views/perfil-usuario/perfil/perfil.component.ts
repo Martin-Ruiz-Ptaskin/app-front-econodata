@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { cilCash, cilUser , cilClipboard} from '@coreui/icons';
 import { PerfilService } from '../service/perfil.service';
+import {FinanzasService} from '../../finanzas/service/finanzas.service'
+
 import { FunctionsService } from '../../common/services/functions.service';
 type FinanceData = {
   id: number;
@@ -29,30 +31,61 @@ export class PerfilComponent implements OnInit {
   finances:any=null
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
   isLoading:boolean=false;
+  cantidadMensajes:number=0
 
 
 
 
-  constructor( private PerfilService:PerfilService,private FunctionsService:FunctionsService) { }
+  constructor( private PerfilService:PerfilService,private FunctionsService:FunctionsService,private FinanzasService:FinanzasService) { }
    ngOnInit(): void {
+    this.FinanzasService.ConsultaEnCurso$.subscribe((resp:boolean)=>{
+      this.isLoading=resp;
+    })
+
        this.PerfilService.getPerfilData().subscribe((resp:any)=>{
+          console.log(resp)
           this.response=true
-          this.finances = this.processFinanceData(resp.data);
-          console.log(this.response)
+          this.finances = resp==false?false: this.processFinanceData(resp.data);
+          console.log(this.finances)
           this.chartDoughnutData=this.FunctionsService.crearGraficoTorta(this.finances.finances.gastos)
+          this.message.push({role:"assistant",content:"Hola! ¿tienes preguntas sobre tus finanzas?"})
+
        })
    }
     CharlaChatGptEvento(mensaje: string) {
-    console.log(mensaje)
-    this.message.push({role:"user",content:mensaje})
-   /* this.FinanzasService.ConversacionGPTApi(this.message).subscribe((resp:any)=>{
-      console.log(resp)
-      if(resp.respuesta){
-        this.message.push({role:"assistant",content:resp.respuesta})
-      }
+    console.log(this.finances.finances)
+    let pregunta
+    if(this.cantidadMensajes==0){
+      pregunta=this.finances.finances
+      pregunta.pregunta=mensaje
+      console.log(pregunta)
+      this.message.push({role:"user",content:mensaje})
+      this.FinanzasService.MsgGPTApi(pregunta).subscribe((resp:any)=>{
 
-    })
-  */
+        if(resp.respuesta){
+          this.requestEnviado=2
+          this.message.push({role:"assistant",content:resp.respuesta})
+        }
+
+      })
+
+    }
+    else{
+      pregunta=mensaje
+      this.message.push({role:"user",content:mensaje})
+      this.FinanzasService.ConversacionGPTApi({role:"user",content:mensaje}).subscribe((resp:any)=>{
+        console.log(resp)
+        if(resp.respuesta){
+          this.message.push({role:"assistant",content:resp.respuesta})
+        }
+
+      })
+
+    }
+    this.cantidadMensajes++
+
+
+
   }
    processFinanceData(financeArray: FinanceData[]) {
     if (financeArray.length === 0) {

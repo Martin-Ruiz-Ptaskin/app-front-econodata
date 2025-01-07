@@ -132,17 +132,19 @@ return path
 
   onFocus() {
     this.inputFocused = true;
+    console.log("focus")
     if(window.innerWidth<500){
       this.verMenu=false
     }
   }
 
   onBlur() {
+    console.log("no focus")
 
-    setTimeout(() => {
+
       this.inputFocused = false;
       this.verMenu=true
-    }, 100);  // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
+     // Espera un poco para no ocultar inmediatamente al hacer clic en una sugerencia
   }
   validarCredenciales(){
     this.login.getCredentialsFromLocalStorage()

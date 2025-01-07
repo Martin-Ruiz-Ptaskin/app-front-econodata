@@ -86,7 +86,6 @@ p{
 
 .input:focus {
   opacity: 1;
-  width: 550px;
 }
 
 @media (max-width: 500px) {
@@ -101,6 +100,5 @@ p{
   }
   .input:focus {
     opacity: 1;
-    width: 100%;
   }
 }

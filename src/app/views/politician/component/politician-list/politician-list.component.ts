@@ -50,8 +50,13 @@ FoundsList: any=[];
         this.FoundsList = this.FoundsList.concat(response.data.map((item:any) => {
 
           return {
-            Fondo: {nombre:item.name,tipo:"link",accion:"/"},
-            Ultima_modificación:  {nombre:item.date,tipo:"texto"},
+            Nombre:  {nombre:item.name,    tipo:"texto",  accion:"/"},
+            Ticker:  {nombre:item.asset , tipo:"link", accion:"/insider/ticket/"+item.asset},
+            partido: {nombre:item.party ,    tipo:"texto", accion:"/"},
+            Fecha:   {nombre:item.pubDate ,    tipo:"texto", accion:"/"},
+            Monto:   {nombre:item.value ,  tipo:"texto", accion:"/"},
+            Operacion:   {nombre: item.operacion ,  tipo:"texto", accion:"/"}
+
           };
         }));
 

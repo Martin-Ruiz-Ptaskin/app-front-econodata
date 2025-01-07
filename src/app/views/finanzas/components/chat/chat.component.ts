@@ -14,7 +14,7 @@ export class ChatComponent {
   @Output() messageOut = new EventEmitter<string>();
 
   newMessage:string="";
-sendMessage() {
+  sendMessage() {
     this.messageOut.emit(this.newMessage);
     this.newMessage=""
   }
@@ -22,9 +22,7 @@ sendMessage() {
 
   // Método para determinar la clase basada en el remitente
   getMessageClass(role: string): string {
-    console.log(this.message)
 
-    console.log(role)
     return role === 'user' ? 'message other-message float-right ' : 'message my-message';
   }
 

@@ -46,7 +46,6 @@ export class LoginService {
         // Verificar si el valor "status" es 200 (éxito)
         if (response.status != 200) {
           this.error.openSnackBar(response.message, "ok");
-          throw new HttpErrorResponse({ status: 400, statusText: response.message });
         } else {
           // Guardar email y pass en el localStorage
 

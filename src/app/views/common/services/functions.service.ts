@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {pastelColors} from './colors'
 @Injectable({
   providedIn: 'root'
 })
