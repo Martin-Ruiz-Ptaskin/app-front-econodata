@@ -60,7 +60,7 @@ export class PerfilComponent implements OnInit {
       pregunta.pregunta=mensaje
       console.log(pregunta)
       this.message.push({role:"user",content:mensaje})
-      this.FinanzasService.MsgGPTApi(pregunta).subscribe((resp:any)=>{
+      this.FinanzasService.ConversacionGPTApi({role:"user",content:pregunta}).subscribe((resp:any)=>{
 
         if(resp.respuesta){
           this.requestEnviado=2

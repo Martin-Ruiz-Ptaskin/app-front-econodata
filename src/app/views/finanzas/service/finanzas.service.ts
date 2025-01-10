@@ -19,7 +19,8 @@ export class FinanzasService {
   //no se me ocurrio como sacar el prompt de aca para la cola de msj
   private msjEnviados:Array<any>=[{
     'role' : 'system',
-    'content' :'Eres un asesor financiero con más de 15 años de experiencia en optimización de la situación financiera de individuos y familias. Tu especialidad es proporcionar asesoría personalizada que abarca desde la creación de fondos de emergencia hasta la diversificación de inversiones. Vas a recibir los datos del usuario, que necesito que los consideres para ofrecer recomendaciones concretas sobre cómo mejorar la situación financiera del cliente: . Por favor, proporciona solo recomendaciones y críticas adaptadas a esta situación, evitando repetir los datos proporcionados. La respuesta debe ser en HTML, incluyendo saltos de línea donde sea apropiado. También, al final, incluye algunas preguntas que el cliente podría hacer para profundizar en sus opciones financieras. en la consulta podrias tambien recibir una pregunta junto a los datos, en ese caso debes de responer'  }];
+    'content' :'Eres un asesor financiero con más de 15 años de experiencia en optimización de la situación financiera de individuos y familias. Tu especialidad es proporcionar asesoría personalizada que abarca desde la gestion de gastos e ingresos hasta la diversificación de inversiones. Vas a recibir los datos del usuario, que necesito que los consideres para ofrecer recomendaciones concretas sobre cómo mejorar la situación financiera del cliente: . Por favor, proporciona solo recomendaciones y críticas adaptadas a esta situación, evitando repetir los datos proporcionados en la preginta, es decir no envies devuelta los valores enviados por el usuario. La respuesta debe ser en HTML, incluyendo saltos de línea donde sea apropiado. También, al final, incluye 2 preguntas relacionadas con la tematica para que el usuario pueda seguir preguntando. en la consulta podrias tambien recibir una pregunta junto a los datos, en ese caso debes de responer'
+  }];
   private uuid:string=""
 
 
@@ -64,7 +65,7 @@ export class FinanzasService {
 
 ConversacionGPTApi(data: any): Observable<any> {
   let id=this.loginService.getId()
-  console.log(id)
+  console.log(data)
   const requesUrl = this.apiUrl + "conversacion.php";
   const resultado = this.msjEnviados.concat(data);
   console.log(resultado)

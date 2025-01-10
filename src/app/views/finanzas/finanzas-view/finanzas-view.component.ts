@@ -24,6 +24,7 @@ export class FinanzasViewComponent implements OnInit {
   finances:any
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
   isLoading:boolean=false
+  cargarValoresInicialesContador=0
 
   // Declaras la variable loginService con el prefijo private
   constructor(private renderer: Renderer2, private el: ElementRef,private loginService: LoginService,private FinanzasService:FinanzasService,private FunctionsService:FunctionsService) {
@@ -130,7 +131,7 @@ finalizar(){
     console.log(this.chartDoughnutData)
     this.requestEnviado=1
     this.scrollToBottom();
-      this.FinanzasService.MsgGPTApi(datos).subscribe((resp:any)=>{
+      this.FinanzasService.ConversacionGPTApi({role:"user",content:datos}).subscribe((resp:any)=>{
 
         if(resp.respuesta){
           this.requestEnviado=2
@@ -165,6 +166,9 @@ CharlaChatGptEvento(mensaje: string) {
 }
 
 cargarValoresIniciales() {
+  this.cargarValoresInicialesContador++;
+  if (this.cargarValoresInicialesContador > 9) {
+
   this.ingresos = this._formBuilder.group({
     campos: this._formBuilder.array([
       this.crearCampo({ categoria: 'sueldo', monto: 2200000 }),
@@ -196,6 +200,9 @@ cargarValoresIniciales() {
     ])
   });
 }
+}
+
+
 scrollToBottom(): void {
   try {
     setTimeout(() => {
