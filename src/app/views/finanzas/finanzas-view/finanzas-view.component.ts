@@ -21,6 +21,8 @@ export class FinanzasViewComponent implements OnInit {
   isLinear = false;
   chartDoughnutData:any
   message:Array<any>=[]
+  messageApi:Array<any>=[]
+
   finances:any
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
   isLoading:boolean=false
@@ -155,10 +157,12 @@ finalizar(){
 CharlaChatGptEvento(mensaje: string) {
   console.log(mensaje)
   this.message.push({role:"user",content:mensaje})
+  this.messageApi.push({role:"user",content:mensaje})
   this.FinanzasService.ConversacionGPTApi(this.message).subscribe((resp:any)=>{
-    console.log(resp)
     if(resp.respuesta){
       this.message.push({role:"assistant",content:resp.respuesta})
+      this.messageApi.push({role:"assistant",content:resp.respuesta})
+
     }
 
   })

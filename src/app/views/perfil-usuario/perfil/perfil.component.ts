@@ -27,7 +27,9 @@ export class PerfilComponent implements OnInit {
   icons = { cilCash, cilUser,cilClipboard };
   chartDoughnutData:any
   response:boolean=false
+  messageApi:Array<any>=[]
   message:Array<any>=[]
+
   finances:any=null
   requestEnviado:number=0 //0 no se envio //1 en progreso //2 resultado
   isLoading:boolean=false;
@@ -59,12 +61,15 @@ export class PerfilComponent implements OnInit {
       pregunta=this.finances.finances
       pregunta.pregunta=mensaje
       console.log(pregunta)
+      this.messageApi.push({role:"user",content:pregunta})
       this.message.push({role:"user",content:mensaje})
-      this.FinanzasService.ConversacionGPTApi({role:"user",content:pregunta}).subscribe((resp:any)=>{
+      this.FinanzasService.ConversacionGPTApi(this.messageApi).subscribe((resp:any)=>{
 
         if(resp.respuesta){
           this.requestEnviado=2
           this.message.push({role:"assistant",content:resp.respuesta})
+          this.messageApi.push({role:"assistant",content:resp.respuesta})
+
         }
 
       })
@@ -72,11 +77,13 @@ export class PerfilComponent implements OnInit {
     }
     else{
       pregunta=mensaje
+      this.messageApi.push({role:"user",content:pregunta})
       this.message.push({role:"user",content:mensaje})
-      this.FinanzasService.ConversacionGPTApi({role:"user",content:mensaje}).subscribe((resp:any)=>{
-        console.log(resp)
+      this.FinanzasService.ConversacionGPTApi(this.messageApi).subscribe((resp:any)=>{
         if(resp.respuesta){
           this.message.push({role:"assistant",content:resp.respuesta})
+          this.messageApi.push({role:"assistant",content:resp.respuesta})
+
         }
 
       })
