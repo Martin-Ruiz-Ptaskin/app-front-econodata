@@ -40,7 +40,6 @@ export class SankeyComponent implements AfterViewInit ,OnInit {
     }
   };
   ngOnInit(): void {
-    console.log(this.finances)
     if (this.finances) {
       const generatedData = this.generateGraphData(this.finances);
 
@@ -49,7 +48,6 @@ export class SankeyComponent implements AfterViewInit ,OnInit {
       this.data.nodes = generatedData.nodes;
       this.data.edges = generatedData.edges;
 
-      console.log(this.data)
 
       const graphOptions = {
         canvasStyle: 'width: 100%; height:90%',

@@ -152,9 +152,7 @@ finalizar(){
 
 }
 
-
-
-CharlaChatGptEvento(mensaje: string) {
+CharlaChatGptEvento(mensaje:any) {
   console.log(mensaje)
   this.message.push({role:"user",content:mensaje})
   this.messageApi.push({role:"user",content:mensaje})
@@ -162,11 +160,8 @@ CharlaChatGptEvento(mensaje: string) {
     if(resp.respuesta){
       this.message.push({role:"assistant",content:resp.respuesta})
       this.messageApi.push({role:"assistant",content:resp.respuesta})
-
     }
-
   })
-
 }
 
 cargarValoresIniciales() {

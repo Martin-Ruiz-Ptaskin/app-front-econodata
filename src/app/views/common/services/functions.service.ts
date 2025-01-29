@@ -16,7 +16,6 @@ export class FunctionsService {
     for (let i = 0; i < cantidad; i++) {
       const hue = i * paso; // Asegura una distribución uniforme del matiz
       const color = this.hslToHex(hue, 70, 80); // Saturación 70% y luminosidad 80% para tonos pastel
-      console.log(color)
       colores.push(color);
     }
 
