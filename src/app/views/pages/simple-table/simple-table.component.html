@@ -2,42 +2,60 @@
 
   <table  mat-table [dataSource]="skeleton" class="mat-elevation-z8">
 
-<!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition" -->
       <ng-container *ngFor="let item of displayedColumns" matColumnDef={{item}}>
         <th mat-header-cell *matHeaderCellDef> {{item}} </th>
 
-          <td class="skeleton"  mat-cell *matCellDef="let element " > <a *ngIf="element[item].tipo =='link'" (click)="redirect(element[item].accion)" >{{element[item].nombre}} </a> <p *ngIf="element[item].tipo !='link'">{{element[item].nombre}} </p></td>
-
-
+        <td class="skeleton" mat-cell *matCellDef="let element" >
+          <!-- movimiento especial -->
+          <ng-container *ngIf="item === 'movimiento'; else normalCellSkeleton">
+            <span [ngClass]="
+              (element[item]?.class) ? element[item].class :
+              (( (element[item]?.nombre || element[item] || '') | uppercase) === 'VENTA' ? 'movimiento-venta' :
+               (( (element[item]?.nombre || element[item] || '') | uppercase) === 'COMPRA' ? 'movimiento-compra' : ''))">
+              {{ (element[item]?.nombre || element[item] || '') | uppercase }}
+            </span>
+          </ng-container>
+          <ng-template #normalCellSkeleton>
+            <a *ngIf="element[item]?.tipo =='link'" (click)="redirect(element[item].accion)">{{element[item].nombre}}</a>
+            <p *ngIf="element[item]?.tipo !='link'">{{element[item].nombre}}</p>
+          </ng-template>
+        </td>
 
       </ng-container>
-
 
 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-
 </table>
 </div>
-<div *ngIf="inputdataSource!=''" style="overflow-x: auto;">
-    <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+<div *ngIf="inputdataSource!=''" style="overflow-x: auto;">
+  <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
         <ng-container *ngFor="let item of displayedColumns" matColumnDef={{item}}>
           <th mat-header-cell *matHeaderCellDef> {{item}} </th>
 
-            <td  mat-cell *matCellDef="let element" > <a *ngIf="element[item].tipo =='link'" [routerLink]="'/'+element[item].accion">{{element[item].nombre}} </a> <p *ngIf="element[item].tipo !='link'">{{element[item].nombre}} </p></td>
+          <td mat-cell *matCellDef="let element" >
+            <!-- movimiento especial -->
+            <ng-container *ngIf="item === 'movimiento'; else normalCell">
+              <span [ngClass]="
+                (element[item]?.class) ? element[item].class :
+                (( (element[item]?.nombre || element[item] || '') | uppercase) === 'VENTA' ? 'movimiento-venta' :
+                 (( (element[item]?.nombre || element[item] || '') | uppercase) === 'COMPRA' ? 'movimiento-compra' : ''))">
+                {{ (element[item]?.nombre || element[item] || '') | uppercase }}
+              </span>
+            </ng-container>
 
-
+            <ng-template #normalCell>
+              <a *ngIf="element[item]?.tipo =='link'" [routerLink]="'/'+element[item].accion">{{element[item].nombre}}</a>
+              <p *ngIf="element[item]?.tipo !='link'">{{element[item].nombre}}</p>
+            </ng-template>
+          </td>
 
         </ng-container>
 
-
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
 
 </table>
 </div>

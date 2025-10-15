@@ -1,4 +1,4 @@
-import { Component, Input,OnInit,HostListener,ChangeDetectionStrategy,OnDestroy } from '@angular/core';
+import { Component, Input,OnInit,HostListener,ChangeDetectionStrategy,OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
@@ -18,7 +18,7 @@ import { HeaderService } from '../services/header.service';
 })
 
 export class DefaultHeaderComponent extends HeaderComponent implements OnInit,OnDestroy {
-
+  @ViewChild('searchContainer') searchContainer!: ElementRef;
   @Input() sidebarId: string = "sidebar";
   public newMessages = new Array(4)
   public newTasks = new Array(5)
@@ -149,5 +149,22 @@ return path
   validarCredenciales(){
     this.login.getCredentialsFromLocalStorage()
 
+  }
+
+  onSelectItem(item: any) {
+    // cerrar dropdown al seleccionar y ejecutar navegación
+    this.inputFocused = false;
+    // navegar según tu lógica:
+    // this.router.navigate([this.obtnerRuta(item)]);
+  }
+
+  // cierra dropdown cuando se hace click fuera del contenedor
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const container = this.searchContainer?.nativeElement;
+    if (!container) return;
+    if (!container.contains(event.target as Node)) {
+      this.inputFocused = false;
+    }
   }
 }
